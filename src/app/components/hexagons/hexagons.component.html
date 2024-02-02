@@ -1,24 +1,24 @@
 <header class="header">
-  <a title="Inicio" class="navbar-brand cursiv" href="/">
+  <a title="Inicio" class="navbar-brand cursiv" href="/home">
     <!-- routerLink="/"
     routerLinkActive="active" -->
     <app-factivar-brand class="logo-factivar" />
   </a>
 
   <nav class="navigation">
-    <a href="/clientes/overview">
+    <a href="/clientes">
       <app-hexagon-item title="Clientes" aria-label="Clientes">
         <!-- (click)="toClientes()" -->
-        <!-- routerLink="/clientes/overview" -->
+        <!-- routerLink="/clientes" -->
         <!-- routerLinkActive="active" -->
         <!-- los slots se invocan con el nombre del select de ng-content sin el punto. -->
         <i class="fa fa-bullseye slot-icon"></i>
       </app-hexagon-item>
     </a>
-    <a href="/facturas/overview">
+    <a href="/facturas">
       <app-hexagon-item title="Facturas" aria-label="Facturas">
         <!-- (click)="toFacturas()" -->
-        <!-- routerLink="/facturas/overview" -->
+        <!-- routerLink="/facturas" -->
         <i class="fa fa-braille slot-icon"></i>
       </app-hexagon-item>
     </a>
