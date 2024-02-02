@@ -9,11 +9,11 @@ import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
-  // { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 
   // Rutas no protegidas por el guard
   {
-    path: '',
+    path: 'home',
     title: 'Inicio | Factivar',
     // component: HomePageComponent,
     loadComponent: () =>
@@ -44,7 +44,7 @@ export const routes: Routes = [
     // canActivate: [authGuard],
     children: [
       {
-        path: 'overview',
+        path: '',
         title: 'Clientes | Factivar',
         // component: ClientesComponent,
         loadComponent: () =>
@@ -78,7 +78,7 @@ export const routes: Routes = [
     // canActivate: [authGuard],
     children: [
       {
-        path: 'overview',
+        path: '',
         title: 'Facturas | Factivar',
         // component: FacturaAvanzadoComponent,
         loadComponent: () =>
