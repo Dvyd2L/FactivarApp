@@ -1,0 +1,9 @@
+g {
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 15px;
+
+  & > path {
+    stroke-linecap: "round";
+  }
+}

@@ -1,0 +1,17 @@
+export enum OAuthProviderEnum {
+    Google = 'google',
+    Facebook = 'facebook',
+    Github = 'github',
+    Twitter = 'twitter',
+    Instagram = 'instagram',
+    LinkedIn = 'linkedin',
+    Microsoft = 'microsoft',
+    Yahoo = 'yahoo',
+    Discord = 'discord',
+    Twitch = 'twitch',
+    Spotify = 'spotify',
+    Slack = 'slack',
+    Line = 'line',
+    WeChat = 'wechat',
+    Weibo = 'weibo',
+}

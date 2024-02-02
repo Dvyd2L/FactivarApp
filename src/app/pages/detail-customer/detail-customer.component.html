@@ -1,0 +1,56 @@
+@defer (on timer(1s)) {
+<article *ngIf="customer$ | async as c" class="card" style="width: 80dvw">
+  <div class="card-body">
+    <header>
+      <h5 class="card-title">{{ c.nombre }}</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary">CIF: {{ c.cif }}</h6>
+    </header>
+    <p class="card-text">Fecha de alta: {{ c.fechaAlta | date }}</p>
+    <p class="card-text">
+      Telefono:
+      <a href="callto:{{ c.telefono }}" class="card-link">
+        {{ c.telefono }}
+      </a>
+    </p>
+    <p class="card-text">
+      Email:
+      <a href="mailto:{{ c.email }}" class="card-link">{{ c.email }}</a>
+    </p>
+    <p class="card-text">Dirección: {{ c.direccion }}</p>
+
+    <ul *ngIf="c.facturaClientes">
+      @for (item of c.facturaClientes; track $index) {
+      <li>
+        <p>Numero factura: {{ item.numeroFactura }}</p>
+        <p>Descripción Operación: {{ item.descripcionOperacion }}</p>
+        <p>Fecha Expedición: {{ item.fechaExpedicion | date }}</p>
+        <p>Fecha Cobro: {{ item.fechaCobro | date }}</p>
+        <p>Pendiente Pago: {{ item.pendientePago ? "SI" : "NO" }}</p>
+        <!-- <p>Total: {{ item.total | currency }}</p> -->
+        <button class="btn btn-success" type="button" (click)="verFactura(item.facturaId)">Ver factura</button>
+      </li>
+      <pre>{{ item | json }}</pre>
+      }
+    </ul>
+    
+    <ul *ngIf="c.facturaProveedors">
+      @for (item of c.facturaProveedors; track $index) {
+        <li>
+          <p>Numero factura: {{ item.numeroFactura }}</p>
+          <p>Descripción Operación: {{ item.descripcionOperacion }}</p>
+          <p>Fecha Expedición: {{ item.fechaExpedicion | date }}</p>
+          <p>Fecha Cobro: {{ item.fechaCobro | date }}</p>
+          <p>Pendiente Pago: {{ item.pendientePago ? "SI" : "NO" }}</p>
+          <!-- <p>Total: {{ item.total | currency }}</p> -->
+          <button class="btn btn-success" type="button" (click)="verFactura(item.facturaId)">Ver factura</button>
+        </li>
+        <pre>{{ item | json }}</pre>
+      }
+    </ul>
+  </div>
+</article>
+} @loading (after 100ms; minimum 1s) {
+<app-loader />
+} @placeholder {
+<app-loader />
+}

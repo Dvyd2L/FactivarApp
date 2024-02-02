@@ -1,0 +1,259 @@
+<div>
+  <p-table
+    #dt
+    [value]="clients"
+    [rows]="5"
+    [paginator]="true"
+    [globalFilterFields]="[
+      'cif',
+      'name',
+      'email',
+      'phone',
+      'direction',
+      'date'
+    ]"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedClients"
+    [rowHover]="true"
+    dataKey="cif"
+    currentPageReportTemplate="Mostrando de {first} a {last} de {totalRecords} entradas"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+          <div class="flex align-items-center justify-content-between">
+            <h5 class="m-0">Clientes</h5>
+            <span class="p-input-icon-right">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                class="form-control"
+                (input)="dt.filterGlobal(eventHandler($event), 'contains')"
+                placeholder="Buscar..."
+              />
+            </span>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+          <button
+            pButton
+            pRipple
+            label="Nuevo"
+            icon="pi pi-plus"
+            class="p-button-success mr-2"
+            (click)="openNew()"
+          ></button>
+          <button
+            pButton
+            pRipple
+            label="Eliminar"
+            icon="pi pi-trash"
+            class="p-button-danger"
+            (click)="deleteSelectedClients()"
+            [disabled]="!selectedClients || !selectedClients.length"
+          ></button>
+        </ng-template>
+      </p-toolbar>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th scope="col" style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th scope="col" pSortableColumn="cif" style="min-width: 10rem">
+          CIF <p-sortIcon field="cif"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="name">
+          Nombre <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="email" style="min-width: 10rem">
+          Email <p-sortIcon field="email"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="phone">
+          Teléfono <p-sortIcon field="phone"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="direcction" style="min-width: 10rem">
+          Dirección <p-sortIcon field="direcction"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="date" style="min-width: 10rem">
+          Fecha Alta <p-sortIcon field="date"></p-sortIcon>
+        </th>
+        <!-- <th>Image</th> -->
+        <th scope="col" colspan="2"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-client>
+      <tr>
+        <td scope="row">
+          <p-tableCheckbox [value]="client"></p-tableCheckbox>
+        </td>
+        <td>
+          {{ client.cif }}
+          <button
+            pButton
+            pRipple
+            icon="pi pi-search"
+            class="p-button-rounded p-button-primary mr-2"
+            (click)="emitSearch(client.cif)"
+          ></button>
+        </td>
+        <td>{{ client.nombre }}</td>
+        <td>{{ client.email }}</td>
+        <td>{{ client.telefono }}</td>
+        <td>{{ client.direccion }}</td>
+        <td>{{ client.fechaAlta | date }}</td>
+        <!-- <td><img [src]="'https://primefaces.org/cdn/primeng/images/demo/client/' + client.image" [alt]="client.name" width="50" class="shadow-4" /></td> -->
+
+        <!-- <td><p-rating [ngModel]="client.rating" [readonly]="true" [cancel]="false"></p-rating></td> -->
+        <td>
+          <!-- <p-tag [value]="client.inventoryStatus" [severity]="getSeverity(client.inventoryStatus)"></p-tag> -->
+        </td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mr-2"
+            (click)="editClient(client)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger"
+            (click)="emitDelete(client)"
+          ></button>
+          <!-- (click)="deleteClient(client)" -->
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        En total hay {{ clients ? clients.length : 0 }} clientes.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+<p-dialog
+  [(visible)]="clientDialog"
+  [style]="{ width: '450px' }"
+  header="Modificar datos de Cliente"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="form-floating mb-2">
+      <input
+        [readOnly]="true"
+        disabled
+        type="text"
+        pInputText
+        class="form-control"
+        name="cif"
+        [(ngModel)]="client.cif"
+        required
+        #cif="ngModel"
+        placeholder="CIF obligatorio"
+        autofocus
+      />
+      <label>CIF</label>
+      @if(!cif.valid && cif.touched){
+      <span class="form-text text-danger"> CIF obligatorio </span>
+      }
+    </div>
+
+    <div class="form-floating mb-2">
+      <input
+        placeholder="Escribe el nombre (obligatorio)"
+        class="form-control"
+        type="text"
+        pInputText
+        id="name"
+        [(ngModel)]="client.nombre"
+        required
+        autofocus
+      />
+      <label for="name">Nombre</label>
+      @if (submitted && !client.nombre) {
+      <small class="p-error">Nombre obligatorio.</small>
+      }
+    </div>
+
+    <div class="form-floating mb-2">
+      <input
+        type="text"
+        pInputText
+        class="form-control"
+        name="direccion"
+        [(ngModel)]="client.direccion"
+        required
+        #direccion="ngModel"
+        placeholder="Localidad obligatoria"
+        autofocus
+      />
+      <label>Direccion</label>
+      @if(!direccion.valid && direccion.touched){
+      <span class="form-text text-danger"> Dirección obligatoria </span>
+      }
+    </div>
+
+    <div class="form-floating mb-2">
+      <input
+        type="text"
+        pInputText
+        class="form-control"
+        name="telefono"
+        [(ngModel)]="client.telefono"
+        required
+        #telefono="ngModel"
+        placeholder="Teléfono obligatorio"
+        autofocus
+      />
+      <label>Teléfono</label>
+      @if(!telefono.valid && telefono.touched){
+      <span class="form-text text-danger"> Teléfono obligatorio </span>
+      }
+    </div>
+
+    <div class="form-floating mb-2">
+      <input
+        type="text"
+        pInputText
+        class="form-control"
+        name="email"
+        [(ngModel)]="client.email"
+        required
+        #email="ngModel"
+        placeholder="Email obligatorio"
+        autofocus
+      />
+      <label>Email</label>
+      @if (!email.valid && email.touched) {
+      <span class="form-text text-danger"> Email obligatorio </span>
+      }
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancelar"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Guardar"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveClient()"
+    ></button>
+  </ng-template>
+</p-dialog>

@@ -1,0 +1,115 @@
+<!-- FORMULARIO PARA AGREGAR CLIENTES -->
+<section class="row mt-4">
+  <div class="col-4">
+    <h1>Agregar cliente</h1>
+    <form #formulario="ngForm" (submit)="guardar()">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          name="nombre"
+          [(ngModel)]="cliente.nombre"
+          required
+          #nombre="ngModel"
+          placeholder="Nombre obligatorio"
+        />
+        @if(!nombre.valid && nombre.touched){
+        <span class="form-text text-danger"> Nombre obligatorio </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>CIF</label>
+        <input
+          type="text"
+          class="form-control"
+          name="cif"
+          [(ngModel)]="cliente.cif"
+          [readOnly]="editar"
+          required
+          #cif="ngModel"
+          placeholder="CIF obligatorio"
+        />
+        @if(!cif.valid && cif.touched){
+        <span class="form-text text-danger"> CIF obligatorio </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Direccion</label>
+        <input
+          type="text"
+          class="form-control"
+          name="direccion"
+          [(ngModel)]="cliente.direccion"
+          required
+          #direccion="ngModel"
+          placeholder="Localidad obligatoria"
+        />
+        @if(!direccion.valid && direccion.touched){
+        <span class="form-text text-danger"> Dirección obligatoria </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Teléfono</label>
+        <input
+          type="text"
+          class="form-control"
+          name="telefono"
+          [(ngModel)]="cliente.telefono"
+          required
+          #telefono="ngModel"
+          placeholder="Teléfono obligatorio"
+        />
+        @if(!telefono.valid && telefono.touched){
+        <span class="form-text text-danger"> Teléfono obligatorio </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          type="text"
+          class="form-control"
+          name="email"
+          [(ngModel)]="cliente.email"
+          required
+          #email="ngModel"
+          placeholder="Email obligatorio"
+        />
+        @if (!email.valid && email.touched) {
+        <span class="form-text text-danger"> Email obligatorio </span>
+        }
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="formulario.invalid"
+      >
+        Aceptar
+      </button>
+      <button
+        type="button"
+        class="btn btn-warning"
+        *ngIf="cliente.nombre !== ''"
+        (click)="cancelarEdicion()"
+      >
+        Cancelar edición
+      </button>
+    </form>
+  </div>
+
+  <!-- <div class="col-8"> -->
+    <app-data-table
+      [clients]="clientes"
+      (evSearch)="buscarPorCif($event)"
+      (evDelete)="confirmDelete($event)"
+      (evUpdate)="edit($event)"
+    />
+  <!-- </div> -->
+</section>
+<p-toast />
+<p-confirmDialog />

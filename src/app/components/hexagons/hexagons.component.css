@@ -1,0 +1,48 @@
+.header {
+  padding: 0.1rem;
+  scale: 0.7;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* .logo-factivar {
+  height: 50px;
+  width: 140px;
+  scale: 2;
+
+  & > g {
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 15px;
+
+    & > path {
+      stroke-linecap: "round";
+    }
+  }
+} */
+
+.navigation {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* gap: -1rem; */
+  scale: 0.75;
+  flex: 3;
+}
+
+/* .hexagon-item:hover .icon i {
+  color: #ff0037;
+  transition: 0.6s;
+} */
+/* color: var(--hexagon-item-bg-color); */
+
+.menu {
+  display: flex;
+  flex-flow: row wrap;
+  gap: .5rem;
+  align-items: center;
+  align-content: center;
+}

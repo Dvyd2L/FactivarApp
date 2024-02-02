@@ -1,0 +1,175 @@
+<!-- Container12 es EL PADRE -->
+<div class="container12">
+  <div class="text-center">
+    <img
+      class="fade-in mb-4"
+      src="assets/LogoNegroFondoTransparente.png"
+      alt="login"
+      style="max-width: 100%"
+    />
+  </div>
+
+  <form class="form-signin" #fRegister="ngForm" (submit)="register()">
+    <div class="form-group mb-3">
+      <input
+        id="nombre"
+        type="text"
+        class="form-control"
+        placeholder="Nombre"
+        [(ngModel)]="infoRegister.nombre"
+        name="nombre"
+        #nombre="ngModel"
+        required
+      />
+      @if (!nombre.valid && nombre.touched) {
+      <span class="form-text text-danger"> Nombre obligatorio </span>
+      }
+    </div>
+
+    <div class="form-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Apellidos"
+        [(ngModel)]="infoRegister.apellidos"
+        name="apellido"
+        #apellido="ngModel"
+        required
+      />
+      @if (!apellido.valid && apellido.touched) {
+      <span class="form-text text-danger"> Apellido obligatorio </span>
+      }
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="avatar" hidden aria-label="Avatar">Avatar</label>
+      <input
+        type="file"
+        class="form-control"
+        placeholder="Avatar"
+        name="avatar"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+
+    <div class="form-group mb-3">
+      <input
+        type="email"
+        class="form-control"
+        placeholder="E-mail"
+        [(ngModel)]="infoRegister.email"
+        name="email"
+        #email="ngModel"
+        required
+      />
+      @if (!email.valid && email.touched) {
+      <span class="form-text text-danger"> Email obligatorio </span>
+      }
+    </div>
+
+    <div class="form-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Teléfono"
+        [(ngModel)]="infoRegister.telefono"
+        name="telefono"
+        #telefono="ngModel"
+        required
+      />
+      @if (!telefono.valid && telefono.touched) {
+      <span class="form-text text-danger"> Teléfono obligatorio </span>
+      }
+    </div>
+
+    <!-- <div class="form-group mb-3">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Contraseña"
+        name="password"
+        #pass="ngModel"
+        [(ngModel)]="infoRegister.password"
+        required
+      />
+      @if (!pass.valid && pass.touched) {
+      <span class="form-text text-danger"> Contraseña obligatoria </span>
+      }
+    </div> -->
+    <div class="mb-3">
+      <app-password-input (passwordValueChange)="setPassword($event)"/>
+    </div>
+    <app-password-input placeholder="Repetir Contraseña" (passwordValueChange)="setRepeatPassword($event)"/>
+
+    <!-- <input
+      type="password"
+      class="form-control"
+      placeholder="Repetir Contraseña"
+      name="password2"
+      [(ngModel)]="password"
+      #pass2="ngModel"
+      required
+    />
+    @if (!pass2.valid && pass2.touched) {
+    <span class="form-text text-danger"> Repetir Contraseña obligatoria </span>
+    } -->
+  </form>
+
+  <div class="mt-2 d-flex justify-content-center">
+    <app-boton-accesos texto="Continuar" (click)="register()"/>
+  </div>
+
+  <div class="checkbox-wrapper">
+    <input id="terms-checkbox-37" name="checkbox" type="checkbox" />
+    <label class="terms-label" for="terms-checkbox-37">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 200 200"
+        class="checkbox-svg"
+      >
+        <mask fill="white" id="path-1-inside-1_476_5-37">
+          <rect height="200" width="200"></rect>
+        </mask>
+        <rect
+          mask="url(#path-1-inside-1_476_5-37)"
+          stroke-width="40"
+          class="checkbox-box"
+          height="200"
+          width="200"
+        ></rect>
+        <path
+          stroke-width="15"
+          d="M52 111.018L76.9867 136L149 64"
+          class="checkbox-tick"
+        ></path>
+      </svg>
+      <span class="label-text"
+        ><strong
+          >Si aceptas, estás de acuerdo con los Términos del servicio y el Aviso
+          de privacidad.</strong
+        ></span
+      >
+    </label>
+  </div>
+</div>
+
+<button class="btnCasa" routerLink="/">
+  <svg
+    fill="#000000"
+    width="30px"
+    height="30px"
+    viewBox="0 0 24 24"
+    version="1.2"
+    aria-label="Boton para ir al inicio"
+    baseProfile="tiny"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M12 3s-6.186 5.34-9.643 8.232c-.203.184-.357.452-.357.768 0 .553.447 1 1 1h2v7c0 .553.447 1 1 1h3c.553 0 1-.448
+  1-1v-4h4v4c0 .552.447 1 1 1h3c.553 0 1-.447 1-1v-7h2c.553 0 1-.447 1-1 0-.316-.154-.584-.383-.768-3.433-2.892-9.617-8.232-9.617-8.232z"
+    />
+  </svg>
+  Inicio
+</button>
+<p-toast />

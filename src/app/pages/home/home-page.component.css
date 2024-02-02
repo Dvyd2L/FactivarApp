@@ -1,0 +1,213 @@
+* {
+  /* margin: 0; */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  height: auto;
+  width: 100dvw;
+}
+/* .pacoBar {
+  animation: hide-navbar linear forwards;
+  animation-timeline: scroll();
+  animation-range: 0vh 90vh;
+  filter: none;
+ 
+  backdrop-filter: blur(1rem);
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+} */
+.sticky-parallax-header {
+  /* en el top y en la position, tenemos el probelma del footer del homePage */
+  /* position: absolute; */
+  position: fixed;
+  top: 0;
+  animation: sticky-parallax-header-move-and-size linear forwards;
+  animation-timeline: scroll();
+  animation-range: -45vh 90vh;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background-image: url("src/assets/MEJORSIII1024.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-attachment: scroll;
+  background-blend-mode: soft-light;
+  /* La tele hay que configurarla con la nueva imagen */
+  filter: saturate(200%) brightness(70%) contrast(200%);
+}
+
+main {
+  padding-top: 100vh;
+}
+header {
+  position: relative;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+a {
+  text-decoration: none;
+}
+
+.cuerpoHomePage {
+  position: relative;
+
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+/* PRIMERA IMAGEN */
+@keyframes sticky-parallax-header-move-and-size {
+  0% {
+    background-position: 50% 0;
+    height: 100dvh;
+    font-size: calc(4vw + 1em);
+  }
+  50% {
+    height: 100dvh;
+  }
+  100% {
+    background-position: 50% 100%;
+    height: 90dvh;
+    opacity: 0;
+  }
+}
+
+/* CUERPO DE LA PAGINA */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+
+hr {
+  margin: 1rem 0;
+  color: inherit;
+  border: 0;
+  border-top: 1px solid;
+  opacity: 0.25;
+}
+h6,
+h5,
+h4,
+h3,
+h2,
+h1 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+/* SEGUNDA IMAGEN */
+.masthead {
+  animation: sticky-parallax-masthead linear forwards;
+  animation-timeline: scroll();
+  animation-range: -45vh 90vh;
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 35rem;
+  padding: 15rem 0;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.5) 75%,
+      rgba(0, 0, 0, 0.7) 100%
+    ),
+    url("src/assets/OficinaFuturista.jpeg");
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+.colorHexagonos {
+  background-color: #1e2530;
+}
+
+.ricias {
+  height: 50px;
+  width: 100vw;
+  position: relative;
+}
+
+@keyframes masthead {
+  from {
+    background-position: 50% 0;
+    height: 100vh;
+    width: 100%;
+    font-size: calc(4vw + 1em);
+  }
+  to {
+    background-position: 50% 100%;
+    background-color: #fff;
+    height: 100vh;
+    width: 100%;
+  }
+}
+@keyframes sticky-parallax-masthead {
+  from {
+    opacity: 0;
+    scale: 0.5;
+  }
+  to {
+    opacity: 100%;
+    scale: 1;
+  }
+}
+.masthead h1,
+.masthead .h1 {
+  font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.8rem;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.masthead h2,
+.masthead .h2 {
+  max-width: 20rem;
+  font-size: 1rem;
+}
+.videoLogo {
+  max-width: 100%;
+  height: auto;
+}
+@media (min-width: 768px) {
+  .masthead h1,
+  .masthead .h1 {
+    font-size: 4rem;
+    line-height: 4rem;
+  }
+}
+@media (min-width: 992px) {
+  .masthead {
+    height: 100vh;
+    padding: 0;
+  }
+  .masthead h1,
+  .masthead .h1 {
+    font-size: 6.5rem;
+    line-height: 6.5rem;
+    letter-spacing: 0.8rem;
+  }
+  .masthead h2,
+  .masthead .h2 {
+    max-width: 30rem;
+    font-size: 1.25rem;
+  }
+}

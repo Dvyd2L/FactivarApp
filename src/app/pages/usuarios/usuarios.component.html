@@ -1,0 +1,38 @@
+<div class="container">
+    @for (user of users$ | async; track $index) { @defer (on timer(1s)) {
+    <article class="card mb-2" style="width: 80dvw">
+      <div class="card-body">
+        <header>
+          <h5 class="card-title">{{ user.nombre }} {{ user.apellidos }}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">
+            ID: {{ user.id }}
+          </h6>
+          <h6 class="card-subtitle mb-2 text-body-secondary">
+            Rol: {{ user.isAdmin ? "ADMINISTRADOR" : "USUARIO" }}
+          </h6>
+        </header>
+        @if (user.telefono) {
+        <p class="card-text">
+          Telefono:
+          <a href="callto:{{ user.telefono }}" class="card-link">
+            {{ user.telefono }}
+          </a>
+        </p>
+        }
+        <p class="card-text">
+          Email:
+          <a href="mailto:{{ user.email }}" class="card-link">{{
+            user.email
+          }}</a>
+        </p>
+        @if (user.avatarUrl && user.avatarUrl !== '') {
+        <img src="{{ user.avatarUrl }}" alt="Avatar de {{ user.nombre }}" />
+        }
+      </div>
+    </article>
+    } @loading (after 100ms; minimum 1s) {
+    <app-loader />
+    } @placeholder {
+    <app-loader />
+    } }
+</div>

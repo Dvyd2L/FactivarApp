@@ -1,0 +1,34 @@
+<div class="hexagon-item ">
+  <div class="hex-item">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="hex-item">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <a class="hex-content">
+    <span class="hex-content-inner">
+      <span class="icon">
+        <!-- aquí va el icono, los slots se nombran con .slot-{lo que quieras} -->
+        <ng-content select=".slot-icon"></ng-content>
+      </span>
+      <span class="title">{{title}}</span>
+    </span>
+    <!-- este svg es el fondo -->
+    <!-- <ng-content></ng-content> -->
+    <svg
+      viewBox="0 0 173.20508075688772 200"
+      height="200"
+      width="174"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"
+        ></path>
+    </svg>
+  </a>
+</div>

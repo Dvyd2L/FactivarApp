@@ -1,0 +1,38 @@
+<header class="header">
+  <a title="Inicio" class="navbar-brand cursiv" href="/">
+    <!-- routerLink="/"
+    routerLinkActive="active" -->
+    <app-factivar-brand class="logo-factivar" />
+  </a>
+
+  <nav class="navigation">
+    <a href="/clientes/overview">
+      <app-hexagon-item title="Clientes" aria-label="Clientes">
+        <!-- (click)="toClientes()" -->
+        <!-- routerLink="/clientes/overview" -->
+        <!-- routerLinkActive="active" -->
+        <!-- los slots se invocan con el nombre del select de ng-content sin el punto. -->
+        <i class="fa fa-bullseye slot-icon"></i>
+      </app-hexagon-item>
+    </a>
+    <a href="/facturas/overview">
+      <app-hexagon-item title="Facturas" aria-label="Facturas">
+        <!-- (click)="toFacturas()" -->
+        <!-- routerLink="/facturas/overview" -->
+        <i class="fa fa-braille slot-icon"></i>
+      </app-hexagon-item>
+    </a>
+    <a href="/usuarios">
+      <app-hexagon-item title="Usuarios" aria-label="Usuarios">
+        <!-- (click)="toUsuarios()" -->
+        <!-- routerLink="/usuarios" -->
+        <i class="fa fa-id-badge slot-icon"></i>
+      </app-hexagon-item>
+    </a>
+  </nav>
+
+  <menu class="menu">
+    <app-theme-toggle />
+    <app-avatar />
+  </menu>
+</header>

@@ -1,0 +1,242 @@
+<div class="row">
+  <label
+    class="col-2 form-label"
+    aria-label="cantidad"
+    for="invoice_items_attributes_0_quantity"
+    >Cant.</label
+  >
+
+  <label class="col-3 form-label" aria-label="descripcion">Descripción</label>
+
+  <label class="col-2 form-label" aria-label="precio unitario"
+    >Precio unitario</label
+  >
+
+  <label class="col-2 form-label" aria-label="importe">Importe</label>
+
+  <label class="col-2 form-label" aria-label="iva">Tipo de IVA</label>
+
+  <label class="col-1"></label>
+</div>
+
+<div id="items">
+  <input
+    type="hidden"
+    name="invoice[items_attributes][0][id]"
+    id="invoice_items_attributes_0_id"
+    value="225899972"
+    autocomplete="off"
+  />
+
+  <div class="row mb-3" id="row_item_225899972">
+    <div class="col-2 form-group">
+      <input
+        type="text"
+        name="invoice[items_attributes][0][quantity]"
+        id="invoice_items_attributes_0_quantity"
+        [(ngModel)]="article.unidades"
+        placeholder="Cant."
+        class="form-control form-control-sm quantity"
+        tabindex="225899972"
+        maxlength="100"
+        (ngModelChange)="calculaImporte()"
+      />
+    </div>
+
+    <div class="col-3 form-group">
+      <textarea
+        name="invoice[items_attributes][0][description]"
+        id="invoice_items_attributes_0_description"
+        placeholder="Descripción"
+        class="form-control form-control-sm description"
+        rows="2"
+        [(ngModel)]="article.descripcion"
+        maxlength="5000"
+      ></textarea>
+    </div>
+
+    <div class="col-2 form-group">
+      <input
+        type="text"
+        name="invoice[items_attributes][0][price]"
+        id="invoice_items_attributes_0_price"
+        [(ngModel)]="article.pUnitario"
+        placeholder="Precio unitario"
+        class="form-control form-control-sm price"
+        tabindex="225899972"
+        maxlength="100"
+        (ngModelChange)="calculaImporte()"
+      />
+    </div>
+
+    <div class="col-2 form-group">
+      <input
+        type="text"
+        name="invoice[items_attributes][0][amount]"
+        id="invoice_items_attributes_0_amount"
+        [(ngModel)]="article.importe"
+        placeholder="Importe"
+        class="form-control form-control-sm amount"
+        tabindex="225899972"
+        maxlength="100"
+        readonly
+        disabled
+      />
+    </div>
+
+    <div class="col-2 form-group">
+      <input
+        type="hidden"
+        name="invoice[items_attributes][0][tax_rate_id]"
+        id="invoice_items_attributes_0_tax_rate_id"
+        autocomplete="off"
+      />
+
+      <input
+        type="hidden"
+        name="invoice[items_attributes][0][tax_rate_id_2]"
+        id="invoice_items_attributes_0_tax_rate_id_2"
+        autocomplete="off"
+      />
+
+      <select
+        title="IVA"
+        class="form-control"
+        id="iva"
+        name="iva"
+        [(ngModel)]="article.iva"
+      >
+        <option value="0">0%</option>
+        <option value="4">4%</option>
+        <option value="5">5%</option>
+        <option value="10">10%</option>
+        <option value="21">21%</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <label
+      class="col-2 form-label"
+      for="invoice_items_attributes_0_quantity"
+      aria-label="cantidad"
+      >Cant.</label
+    >
+    <label
+      class="col-3 form-label"
+      aria-label="descripcion"
+      for="invoice_items_attributes_0_description"
+      >Descripción</label
+    >
+    <label
+      class="col-2 form-label"
+      aria-label="precio unitario"
+      for="invoice_items_attributes_0_price"
+      >Precio unitario</label
+    >
+    <label
+      class="col-2 form-label"
+      aria-label="importe"
+      for="invoice_items_attributes_0_amount"
+      >Importe</label
+    >
+    <label
+      class="col-2 form-label"
+      aria-label="iva"
+      for="invoice_items_attributes_0_tax_rate_id"
+      >Tipo de IVA</label
+    >
+    <label
+      class="col-2 form-label"
+      aria-label="iva"
+      for="invoice_items_attributes_0_tax_rate_id_2"
+    ></label>
+
+    <button
+      name="button"
+      type="button"
+      class="btn btn-info btn-sm w-100"
+      id="add-item"
+      (click)="emiteArticle()"
+    >
+      Añadir artículo
+    </button>
+  </div>
+  <p-table [value]="articles">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Cantidad</th>
+        <th>Descripción</th>
+        <th>Precio Unitario</th>
+        <th>Importe</th>
+        <th>IVA</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-art let-i="rowIndex">
+      <tr>
+        <td>
+          <div
+            id="unidades"
+            class="form-control"
+            contenteditable="false"
+            style="width: auto"
+          >
+            {{ art.unidades }}
+          </div>
+        </td>
+
+        <td>
+          <div
+            id="descripcion"
+            class="form-control"
+            contenteditable="false"
+            style="width: auto"
+          >
+            {{ art.descripcion }}
+          </div>
+        </td>
+
+        <td>
+          <div
+            id="pUnitario"
+            class="form-control"
+            contenteditable="false"
+            style="width: auto"
+          >
+            {{ art.pUnitario }}
+          </div>
+        </td>
+
+        <td>
+          <div
+            id="importe"
+            class="form-control"
+            contenteditable="false"
+            style="width: auto"
+          >
+            {{ art.importe }}
+          </div>
+        </td>
+
+        <td>
+          <div
+            id="iva"
+            class="form-control"
+            contenteditable="false"
+            style="width: auto"
+          >
+            {{ art.iva }}
+          </div>
+        </td>
+
+        <td>
+          <i
+            class="fas fa-times-circle delete-item acts-as-link text-danger fs-5"
+            title="Borrar artículo"
+            (click)="removeArticle(i)"
+          ></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

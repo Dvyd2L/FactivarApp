@@ -1,1 +1,216 @@
-/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+/* VARIABLES PARA HOMEPAGE */
+:root {
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #7464a1;
+  --bs-pink: #d63384;
+  --bs-red: #a16468;
+  --bs-orange: #fd7e14;
+  --bs-yellow: #e4c662;
+  --bs-green: #67c29c;
+  --bs-teal: #64a19d;
+  --bs-cyan: #1cabc4;
+  --bs-black: #000;
+  --bs-white: #fff;
+  --bs-gray: #6c757d;
+  --bs-gray-dark: #343a40;
+  --bs-gray-100: #f8f9fa;
+  --bs-gray-200: #e9ecef;
+  --bs-gray-300: #dee2e6;
+  --bs-gray-400: #ced4da;
+  --bs-gray-500: #adb5bd;
+  --bs-gray-600: #6c757d;
+  --bs-gray-700: #495057;
+  --bs-gray-800: #343a40;
+  --bs-gray-900: #212529;
+  --bs-primary: #64a19d;
+  --bs-secondary: #7464a1;
+  --bs-success: #67c29c;
+  --bs-info: #1cabc4;
+  --bs-warning: #e4c662;
+  --bs-danger: #a16468;
+  --bs-light: #f8f9fa;
+  --bs-dark: #212529;
+  --bs-black: #000;
+  --bs-white: #fff;
+  --bs-primary-rgb: 100, 161, 157;
+  --bs-secondary-rgb: 116, 100, 161;
+  --bs-success-rgb: 103, 194, 156;
+  --bs-info-rgb: 28, 171, 196;
+  --bs-warning-rgb: 228, 198, 98;
+  --bs-danger-rgb: 161, 100, 104;
+  --bs-light-rgb: 248, 249, 250;
+  --bs-dark-rgb: 33, 37, 41;
+  --bs-black-rgb: 0, 0, 0;
+  --bs-white-rgb: 255, 255, 255;
+  --bs-white-rgb: 255, 255, 255;
+  --bs-black-rgb: 0, 0, 0;
+  --bs-body-color-rgb: 33, 37, 41;
+  --bs-body-bg-rgb: 255, 255, 255;
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --bs-gradient: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0)
+  );
+  --bs-body-font-family: Nunito, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol, Noto Color Emoji;
+  --bs-body-font-size: 1rem;
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 1.5;
+  --bs-body-color: #212529;
+  --bs-body-bg: #fff;
+  --bs-border-width: 1px;
+  --bs-border-style: solid;
+  --bs-border-color: #dee2e6;
+  --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+  --bs-border-radius: 0.375rem;
+  --bs-border-radius-sm: 0.25rem;
+  --bs-border-radius-lg: 0.5rem;
+  --bs-border-radius-xl: 1rem;
+  --bs-border-radius-2xl: 2rem;
+  --bs-border-radius-pill: 50rem;
+  --bs-link-color: #64a19d;
+  --bs-link-hover-color: #50817e;
+  --bs-code-color: #d63384;
+  --bs-highlight-bg: #faf4e0;
+}
+
+/* LOGIN Y REGISTRO RECUADRO */
+.container12 {
+  width: 100%;
+  max-width: 600px; /* Ajusta el ancho máximo según tus necesidades */
+  text-align: center;
+  background: #f8f9fd;
+  background: linear-gradient(
+    0deg,
+    rgb(255, 255, 255) 0%,
+    rgb(244, 247, 251) 100%
+  );
+  border-radius: 40px;
+  padding: 25px 35px;
+  border: 5px solid rgb(255, 255, 255);
+  box-shadow: rgba(64, 202, 168, 0.878) 0px 30px 30px -20px;
+  /* margin: 20px; */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+/* Fondo de imagen (INVESTIGAR) */
+.container12::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh; /* Altura del viewport */
+  width: 100vw; /* Ancho del viewport */
+  z-index: -1; /* Para que el fondo quede detrás del contenido */
+  background-image: url("../src/assets/FondoFinal.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+/* @media (prefers-color-scheme: dark) {
+  .container12::before {
+    background-image: url("../src/assets/FondoFinal_dark.jpg");
+  }
+} */
+/* Aparece y desaparece el logo del registro y login */
+.fade-in {
+  animation: fadeIn ease 5s;
+  -webkit-animation: fadeIn ease 5s;
+  -moz-animation: fadeIn ease 5s;
+  -o-animation: fadeIn ease 5s;
+  -ms-animation: fadeIn ease 5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Boton de casa */
+.btnCasa {
+  display: grid;
+  place-items: center;
+  background: #dfe9e79f;
+  padding: 1.4em;
+  border-radius: 100px;
+  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+    -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: transform 0.5s;
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+}
+
+.btnCasa:hover {
+  box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
+    inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+    -0.5px -0.5px 0px rgba(255, 255, 255, 1),
+    0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transform: translateY(0.5em);
+}
+
+.btnCasa svg {
+  transition: transform 0.5s;
+}
+
+.btnCasa:hover svg {
+  transform: scale(0.9);
+  fill: #333333;
+}
