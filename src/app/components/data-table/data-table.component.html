@@ -105,7 +105,7 @@
         <td>{{ client.email }}</td>
         <td>{{ client.telefono }}</td>
         <td>{{ client.direccion }}</td>
-        <td>{{ client.fechaAlta | date }}</td>
+        <td>{{ client.fechaAlta | date : "dd/MM/yyyy" }}</td>
         <!-- <td><img [src]="'https://primefaces.org/cdn/primeng/images/demo/client/' + client.image" [alt]="client.name" width="50" class="shadow-4" /></td> -->
 
         <!-- <td><p-rating [ngModel]="client.rating" [readonly]="true" [cancel]="false"></p-rating></td> -->
