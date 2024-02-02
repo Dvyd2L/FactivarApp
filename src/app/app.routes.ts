@@ -9,7 +9,7 @@ import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
-     // { path: '', redirectTo: '/', pathMatch: 'full' },
+  // { path: '', redirectTo: '/', pathMatch: 'full' },
 
   // Rutas no protegidas por el guard
   {
@@ -41,7 +41,7 @@ export const routes: Routes = [
   // Rutas protegidas por el guard
   {
     path: 'clientes',
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     children: [
       {
         path: 'overview',
@@ -66,7 +66,7 @@ export const routes: Routes = [
   {
     path: 'usuarios',
     title: 'Usuarios | Factivar',
-    canActivate: [adminGuard],
+    // canActivate: [adminGuard],
     // component: UsuariosComponent,
     loadComponent: () =>
       import('./pages/usuarios/usuarios.component').then(
@@ -75,7 +75,7 @@ export const routes: Routes = [
   },
   {
     path: 'facturas',
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     children: [
       {
         path: 'overview',
