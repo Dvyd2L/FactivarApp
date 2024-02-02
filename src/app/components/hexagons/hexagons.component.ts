@@ -27,10 +27,10 @@ export class HexagonsComponent {
   router = inject(Router);
 
   toClientes() {
-    this.router.navigate(['clientes', 'overview']);
+    this.router.navigate(['clientes']);
   }
   toFacturas() {
-    this.router.navigate(['facturas', 'overview']);
+    this.router.navigate(['facturas']);
   }
   toUsuarios() {
     this.router.navigate(['usuarios']);

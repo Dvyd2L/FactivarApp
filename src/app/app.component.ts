@@ -44,7 +44,7 @@ export class AppComponent {
    * @returns `true` si la ruta actual es '/home', de lo contrario `false`.
    */
   isHome() {
-    return window.location.pathname === '/';
+    return window.location.pathname === '/home';
   }
 
   /**
