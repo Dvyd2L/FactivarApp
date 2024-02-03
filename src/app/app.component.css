@@ -24,7 +24,7 @@
 
   display: flex;
   flex-flow: column nowrap;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .factivar-footer {

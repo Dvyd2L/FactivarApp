@@ -1,4 +1,4 @@
-<div>
+<article>
   <p-table
     #dt
     [value]="clients"
@@ -137,19 +137,19 @@
       </div>
     </ng-template>
   </p-table>
-</div>
+</article>
 <p-dialog
   [(visible)]="clientDialog"
   [style]="{ width: '450px' }"
-  header="Modificar datos de Cliente"
+  header="{{ newClient ? 'Crear' : 'Modificar' }} datos de Cliente"
   [modal]="true"
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
-    <div class="form-floating mb-2">
+    <div class="form-floating mb-1">
       <input
-        [readOnly]="true"
-        disabled
+        [readOnly]="!newClient"
+        [disabled]="!newClient"
         type="text"
         pInputText
         class="form-control"
@@ -166,7 +166,7 @@
       }
     </div>
 
-    <div class="form-floating mb-2">
+    <div class="form-floating mb-1">
       <input
         placeholder="Escribe el nombre (obligatorio)"
         class="form-control"
@@ -183,7 +183,7 @@
       }
     </div>
 
-    <div class="form-floating mb-2">
+    <div class="form-floating mb-1">
       <input
         type="text"
         pInputText
@@ -201,7 +201,7 @@
       }
     </div>
 
-    <div class="form-floating mb-2">
+    <div class="form-floating mb-1">
       <input
         type="text"
         pInputText
@@ -219,7 +219,7 @@
       }
     </div>
 
-    <div class="form-floating mb-2">
+    <div class="form-floating">
       <input
         type="text"
         pInputText

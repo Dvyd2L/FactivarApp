@@ -26,7 +26,7 @@ import { Router } from '@angular/router';
     ToastModule,
     ButtonModule,
     ToolbarModule,
-    FileUploadModule
+    FileUploadModule,
   ],
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.css',
@@ -39,15 +39,17 @@ export class DataTableComponent {
   @Output() evSearch = new EventEmitter<string>();
   @Output() evDelete = new EventEmitter<ICliente>();
   @Output() evUpdate = new EventEmitter<ICliente>();
+  @Output() evCreate = new EventEmitter<ICliente>();
+
+  /**
+   * Lista de clientes.
+   */
+  @Input() clients!: ICliente[];
 
   /**
    * Indica si el diálogo de cliente está abierto o cerrado.
    */
   clientDialog: boolean = false;
-  /**
-   * Lista de clientes.
-   */
-  @Input() clients!: ICliente[];
   /**
    * Cliente seleccionado.
    */
@@ -64,6 +66,7 @@ export class DataTableComponent {
    * Lista de estados.
    */
   statuses!: any[];
+  newClient: boolean = false;
 
   /**
    * Manejador de eventos para el cambio de valor en un campo de entrada.
@@ -85,7 +88,11 @@ export class DataTableComponent {
    * @param cliente - Cliente a editar.
    */
   emitUpdate = (cliente: ICliente) => this.evUpdate.emit(cliente);
-
+  /**
+   * Emite el evento de creación de cliente.
+   * @param cliente - Cliente a crear.
+   */
+  emitCreate = (cliente: ICliente) => this.evCreate.emit(cliente);
 
   /**
    * Abre el diálogo para crear un nuevo cliente.
@@ -101,14 +108,15 @@ export class DataTableComponent {
     };
     this.submitted = false;
     this.clientDialog = true;
+    this.newClient = true;
   }
   /**
    * Elimina los clientes seleccionados.
    */
   deleteSelectedClients() {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected clients?',
-      header: 'Confirm',
+      message: '¿Estás seguro de eliminar estos registros?',
+      header: 'Confirmar',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.clients = this.clients.filter(
@@ -118,10 +126,11 @@ export class DataTableComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Clients Deleted',
+          detail: 'Registros eliminados',
           life: 3000,
         });
       },
+      reject: () => (this.selectedClients = null),
     });
   }
   /**
@@ -171,31 +180,19 @@ export class DataTableComponent {
    * Guarda un cliente.
    */
   saveClient() {
+    const client = this.clients.find((x) => x.cif === this.client.cif);
     this.submitted = true;
 
     if (this.client.nombre?.trim()) {
-      if (this.client.cif) {
-        this.clients[this.findIndexById(this.client.cif)] = this.client;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Client Updated',
-          life: 3000,
-        });
+      if (client) {
+        this.update();
       } else {
-        // this.client.cif = this.createId();
-        // this.client.image = 'client-placeholder.svg';
-        this.clients.push(this.client);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Client Created',
-          life: 3000,
-        });
+        this.create();
       }
 
       this.clients = [...this.clients];
       this.clientDialog = false;
+      this.newClient = false;
       this.client = {
         cif: '',
         direccion: '',
@@ -211,30 +208,20 @@ export class DataTableComponent {
    * @param id - ID del cliente.
    * @returns El índice del cliente en la lista.
    */
-  findIndexById(id: string): number {
-    let index = -1;
-    for (let i = 0; i < this.clients.length; i++) {
-      if (this.clients[i].cif === id) {
-        index = i;
-        break;
-      }
-    }
-
-    return index;
-  }
-  /**
-   * Crea un ID aleatorio para un cliente.
-   * @returns El ID generado.
-   */
-  // createId(): string {
-  //   let id = '';
-  //   var chars =
-  //     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  //   for (var i = 0; i < 5; i++) {
-  //     id += chars.charAt(Math.floor(Math.random() * chars.length));
+  // findIndexById(id: string): number {
+  //   let index = -1;
+  //   for (let i = 0; i < this.clients.length; i++) {
+  //     if (this.clients[i].cif === id) {
+  //       index = i;
+  //       break;
+  //     }
   //   }
-  //   return id;
+
+  //   return index;
   // }
+  findIndexById(id: string): number {
+    return this.clients.findIndex((x) => x.cif === id);
+  }
   /**
    * Obtiene la gravedad de un estado.
    * @param status - Estado del cliente.
@@ -251,5 +238,27 @@ export class DataTableComponent {
       default:
         return 'none';
     }
+  }
+
+  private update() {
+    // this.clients[this.findIndexById(this.client.cif)] = this.client;
+    this.emitUpdate(this.client);
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Successful',
+      detail: 'Registro Actualizado',
+      life: 3000,
+    });
+  }
+
+  private create() {
+    // this.clients.push(this.client);
+    this.emitCreate(this.client);
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Successful',
+      detail: 'Registro Creado',
+      life: 3000,
+    });
   }
 }

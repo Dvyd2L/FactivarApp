@@ -1,6 +1,6 @@
 <!-- FORMULARIO PARA AGREGAR CLIENTES -->
 <section class="row mt-4">
-  <div class="col-4">
+  <!-- <div class="col-4">
     <h1>Agregar cliente</h1>
     <form #formulario="ngForm" (submit)="guardar()">
       <div class="form-group">
@@ -100,7 +100,7 @@
         Cancelar edición
       </button>
     </form>
-  </div>
+  </div> -->
 
   <!-- <div class="col-8"> -->
     <app-data-table
@@ -108,6 +108,7 @@
       (evSearch)="buscarPorCif($event)"
       (evDelete)="confirmDelete($event)"
       (evUpdate)="edit($event)"
+      (evCreate)="guardar($event)"
     />
   <!-- </div> -->
 </section>

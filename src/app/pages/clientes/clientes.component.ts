@@ -98,30 +98,32 @@ export class ClientesComponent implements OnInit {
     ]);
   }
 
-  guardar() {
+  guardar(cliente: ICliente) {
     if (this.editar === false) {
-      this.clientesService.addCliente(this.cliente).subscribe({
-        next: (data) => {
-          this.visibleError = false;
-          this.formulario.reset();
-          this.getClientes();
-          console.log(data);
-        },
-        error: (err) => {
-          console.error({ err });
+      this.clientesService
+        .addCliente({ ...cliente, fechaAlta: undefined })
+        .subscribe({
+          next: (data) => {
+            this.visibleError = false;
+            // this.formulario.reset();
+            this.getClientes();
+            console.log(data);
+          },
+          error: (err) => {
+            console.error({ err });
 
-          if (err instanceof HttpErrorResponse) {
-            this.visibleError = true;
-            this.mensajeError = err.message;
-          }
-        },
-      });
+            if (err instanceof HttpErrorResponse) {
+              this.visibleError = true;
+              this.mensajeError = err.message;
+            }
+          },
+        });
     } else {
-      this.clientesService.updateCliente(this.cliente).subscribe({
+      this.clientesService.updateCliente(cliente).subscribe({
         next: (data) => {
           this.visibleError = false;
           this.cancelarEdicion();
-          this.formulario.reset();
+          // this.formulario.reset();
           this.getClientes();
           this.editar = false;
         },
@@ -140,6 +142,7 @@ export class ClientesComponent implements OnInit {
   edit(cliente: ICliente) {
     this.cliente = { ...cliente };
     this.editar = true;
+    this.guardar(cliente);
   }
 
   cancelarEdicion() {
