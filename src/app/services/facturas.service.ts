@@ -28,7 +28,6 @@ export class FacturasService {
    * @returns Un Observable que emite un objeto IFactura.
    */
   public addFactura(factura: IFacturaNueva): Observable<IFacturaNueva> {
-    console.log(new Date(factura.fechaExpedicion).toLocaleDateString());
 
     const datos = {
       numeroFactura: factura.numeroFactura,
@@ -37,21 +36,23 @@ export class FacturasService {
       fechaExpedicion:
         new Date(factura.fechaExpedicion).getFullYear() +
         '-' +
-        (new Date(factura.fechaExpedicion).getMonth() + 1) +
+        (new Date(factura.fechaExpedicion).getMonth() + 1).toString().padStart(2,'0') +
         '-' +
-        new Date(factura.fechaExpedicion).getDate(),
+        new Date(factura.fechaExpedicion).getDate().toString().padStart(2,'0'),
       fechaCobro:
         new Date(factura.fechaCobro).getFullYear() +
         '-' +
-        (new Date(factura.fechaCobro).getMonth() + 1) +
+        (new Date(factura.fechaCobro).getMonth() + 1).toString().padStart(2,'0') +
         '-' +
-        new Date(factura.fechaCobro).getDate(),
+        new Date(factura.fechaCobro).getDate().toString().padStart(2,'0'),
       clienteId: factura.clienteId,
       proveedorId: factura.proveedorId,
       articulos: factura.articulos
     };
 
-    return this.http.post<IFacturaNueva>(`${this.urlAPI}facturas`, datos);
+    console.log(datos);
+
+    return this.http.post<IFacturaNueva>(`${this.urlAPI}/facturas`, datos);
   }
 
   /**

@@ -88,6 +88,9 @@ export class FacturaAvanzadoComponent {
     this.nuevaFactu.fechaCobro = this.fechaCobro;
     this.nuevaFactu.articulos = this.listaArticulos;
 
-    this.facturasService.addFactura(this.nuevaFactu);
+    this.facturasService.addFactura(this.nuevaFactu).subscribe({
+      next: (data) => console.log(data),
+      error: (err) => console.error(err),
+    })
   }
 }
