@@ -58,10 +58,6 @@ export class FacturaAvanzadoComponent {
   }
 
   comprobarFecha() {
-    console.log(this.fecha);
-    console.log(this.fechaCobro);
-
-    console.log(this.fechaCobro >= this.fecha);
     this.fechaCorrecta = this.fechaCobro >= this.fecha;
   }
   /**

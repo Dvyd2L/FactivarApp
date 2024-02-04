@@ -47,7 +47,12 @@ export class FacturasService {
         new Date(factura.fechaCobro).getDate().toString().padStart(2,'0'),
       clienteId: factura.clienteId,
       proveedorId: factura.proveedorId,
-      articulos: factura.articulos
+      articulos: factura.articulos.map((x) => {
+        return {
+          ...x,
+          iva: Number(x.iva),
+        }
+      })
     };
 
     console.log(datos);
