@@ -21,7 +21,7 @@ export class FacturaAvanzadoComponent {
   fecha = new Date().toISOString().split('T')[0];
   fechaCobro = new Date().toISOString().split('T')[0];
   fechaCorrecta = false;
-  nuevaFactu! : IFacturaResponse;
+  nuevaFactu!: IFacturaResponse;
   /**
    * Referencia al contenedor de vista del componente ArticuloFactura.
    */
@@ -39,15 +39,15 @@ export class FacturaAvanzadoComponent {
   //   this.articuloFactura.createComponent(ArticuloFacturaComponent);
   // }
 
-  addArticulo(item: IProduct){
+  addArticulo(item: IProduct) {
     this.listaArticulos.push(item);
     this.ricias = calculateImportes(this.listaArticulos);
   }
 
-  comprobarFecha(){
+  comprobarFecha() {
     console.log(this.fecha);
     console.log(this.fechaCobro);
-    
+
     console.log(this.fechaCobro >= this.fecha);
     this.fechaCorrecta = this.fechaCobro >= this.fecha;
   }
@@ -65,12 +65,11 @@ export class FacturaAvanzadoComponent {
   // }
 
   removeArticle(item: number) {
-    this.listaArticulos.splice(item,1);
+    this.listaArticulos.splice(item, 1);
     this.ricias = calculateImportes(this.listaArticulos);
   }
 
-  crearFactura(){
-    
-    console.log("creando factura");
+  crearFactura() {
+    console.log('creando factura');
   }
 }
