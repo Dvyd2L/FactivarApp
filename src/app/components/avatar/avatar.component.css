@@ -1,6 +1,9 @@
 .textoGrande {
   font-size: 20px;
 }
+a {
+  text-decoration: none;
+}
 
 /* BOTON CERRAR SESION */
 .Btn-cerrar {
