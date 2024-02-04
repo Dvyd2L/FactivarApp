@@ -156,6 +156,9 @@ h1 {
     width: 100%;
   }
 }
+a {
+  text-decoration: none;
+}
 @keyframes sticky-parallax-masthead {
   from {
     opacity: 0;
