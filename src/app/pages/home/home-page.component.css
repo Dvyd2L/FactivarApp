@@ -73,7 +73,7 @@ a {
     height: 100dvh;
     font-size: calc(4vw + 1em);
   }
-  50% {
+  80% {
     height: 100dvh;
   }
   100% {

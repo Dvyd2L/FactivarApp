@@ -7,7 +7,7 @@
       style="max-width: 100%"
     />
   </div>
-  
+
   <form action="" class="form">
     <form class="form-signin" #fLogin="ngForm" (submit)="login()">
       <div class="form-group mb-3">
@@ -27,12 +27,14 @@
         <span class="form-text text-danger"> Email obligatorio </span>}
       </div>
 
-      <app-password-input class="mb-3" (passwordValueChange)="setPassword($event)"/>
+      <app-password-input
+        class="mb-3"
+        (passwordValueChange)="setPassword($event)"
+      />
 
       <div class="mt-2 d-flex justify-content-center">
-        <app-boton-accesos texto="Continuar" routerLink="/clientes"/>
+        <app-boton-accesos texto="Continuar" routerLink="/clientes" />
       </div>
-      
     </form>
     <span class="forgot-password"
       ><a href="#">¿Te olvidaste de tu contraseña?</a></span
@@ -45,28 +47,30 @@
     <div class="social-account-container">
       <span class="title1">O inicia sesión con</span>
       <div class="social-accounts">
-        <app-google-signin (idToken)="loginWithGoogle($event)"/>
+        <app-google-signin (idToken)="loginWithGoogle($event)" />
         <app-facebook-signin />
       </div>
     </div>
   </form>
 </div>
-
-<button class="btnCasa" routerLink="/">
-  <svg
-    fill="#000000"
-    width="30px"
-    height="30px"
-    viewBox="0 0 24 24"
-    version="1.2"
-    baseProfile="tiny"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M12 3s-6.186 5.34-9.643 8.232c-.203.184-.357.452-.357.768 0 .553.447 1 1 1h2v7c0 .553.447 1 1 1h3c.553 0 1-.448 1-1v-4h4v4c0 .552.447
+<a href="/clientes">
+  <button class="btnCasa">
+    <!-- routerLink="/home" -->
+    <svg
+      fill="#000000"
+      width="30px"
+      height="30px"
+      viewBox="0 0 24 24"
+      version="1.2"
+      baseProfile="tiny"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 3s-6.186 5.34-9.643 8.232c-.203.184-.357.452-.357.768 0 .553.447 1 1 1h2v7c0 .553.447 1 1 1h3c.553 0 1-.448 1-1v-4h4v4c0 .552.447
       1 1 1h3c.553 0 1-.447 1-1v-7h2c.553 0 1-.447 1-1 0-.316-.154-.584-.383-.768-3.433-2.892-9.617-8.232-9.617-8.232z"
-    />
-  </svg>
-  Inicio
-</button>
+      />
+    </svg>
+    Inicio
+  </button>
+</a>
 <p-toast />
