@@ -11,7 +11,7 @@ export class StorageHelper {
    * @param value El valor a establecer.
    * @param useSessionStorage Indica si se debe utilizar el almacenamiento de sesión. Por defecto es verdadero.
    */
-  public static setItem(key: StorageKeyEnum, value: any, useSessionStorage: boolean = true): void {
+  public static setItem(key: StorageKeyEnum, value: any, useSessionStorage: boolean = false): void {
     const storage = useSessionStorage ? sessionStorage : localStorage;
 
     storage.setItem(key, JSON.stringify(value));
@@ -23,7 +23,7 @@ export class StorageHelper {
    * @param useSessionStorage Indica si se debe utilizar el almacenamiento de sesión. Por defecto es verdadero.
    * @returns El valor obtenido o nulo si no se encuentra.
    */
-  public static getItem<T>(key: StorageKeyEnum, useSessionStorage: boolean = true): T | null {
+  public static getItem<T>(key: StorageKeyEnum, useSessionStorage: boolean = false): T | null {
     const storage = useSessionStorage ? sessionStorage : localStorage;
     const item = storage.getItem(key);
 
@@ -35,7 +35,7 @@ export class StorageHelper {
    * @param key La clave del valor a eliminar.
    * @param useSessionStorage Indica si se debe utilizar el almacenamiento de sesión. Por defecto es verdadero.
    */
-  public static removeItem(key: StorageKeyEnum, useSessionStorage: boolean = true): void {
+  public static removeItem(key: StorageKeyEnum, useSessionStorage: boolean = false): void {
     const storage = useSessionStorage ? sessionStorage : localStorage;
 
     storage.removeItem(key);
@@ -45,7 +45,7 @@ export class StorageHelper {
    * Limpia todo el almacenamiento local o de sesión.
    * @param useSessionStorage Indica si se debe utilizar el almacenamiento de sesión. Por defecto es verdadero.
    */
-  public static clear(useSessionStorage: boolean = true): void {
+  public static clear(useSessionStorage: boolean = false): void {
     const storage = useSessionStorage ? sessionStorage : localStorage;
 
     storage.clear();

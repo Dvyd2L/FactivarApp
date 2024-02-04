@@ -27,14 +27,16 @@ import { Component, inject } from '@angular/core';
 import { BotonAccesosComponent } from '../boton-accesos/boton-accesos.component';
 import { IUserPayload } from '@app/interfaces/user';
 import { AuthService } from '@app/services/auth/auth.service';
-import { SocialAuthService } from '@app/services/auth/social-auth.service';
-import { UserService } from '@app/services/user.service';
+// import { SocialAuthService } from '@app/services/auth/social-auth.service';
+// import { UserService } from '@app/services/user.service';
 import { AvatarModule } from 'primeng/avatar';
 // import { AvatarGroupModule } from 'primeng/avatargroup';
 import { BtnGrowComponent } from '../btn-grow/btn-grow.component';
 import { RouterLink } from '@angular/router';
-import { IndexedDBService } from '@app/db/indexed-db.service';
-import { StoreEnum } from '@app/interfaces/enums/store.enum';
+// import { IndexedDBService } from '@app/db/indexed-db.service';
+// import { StoreEnum } from '@app/interfaces/enums/store.enum';
+import { StorageHelper } from '@app/helpers/storage.helper';
+import { StorageKeyEnum } from '@app/interfaces/enums/storage.enum';
 
 @Component({
   selector: 'app-avatar',
@@ -48,16 +50,16 @@ export class AvatarComponent {
   /**
    * Servicio para obtener los datos del usuario.
    */
-  private userService = inject(UserService<IUserPayload>);
+  // private userService = inject(UserService<IUserPayload>);
   /**
    * Servicio para gestionar la autenticación.
    */
-  private idxDB = inject(IndexedDBService);
+  // private idxDB = inject(IndexedDBService);
   private authService = inject(AuthService);
   /**
    * Servicio para gestionar la autenticación social.
    */
-  private socialAuthService = inject(SocialAuthService);
+  // private socialAuthService = inject(SocialAuthService);
   /**
    * Datos del usuario actual.
    */
@@ -68,23 +70,24 @@ export class AvatarComponent {
    * Suscribe al Observable del usuario para obtener los datos del usuario actual.
    */
   ngOnInit(): void {
-    this.userService.getUser().subscribe({
-      next: (data) => (this.user = data),
-      error: (err) => console.error(err),
-    });
+    // this.userService.getUser().subscribe({
+    //   next: (data) => (this.user = data),
+    //   error: (err) => console.error(err),
+    // });
 
-    if (!this.user) {
-      this.idxDB.read<IUserPayload>(StoreEnum.USER).subscribe({
-        next: (data) => {
-          if (data instanceof Array) {
-            this.user = data[0]
-          } else {
-            this.user = data
-          }
-        },
-        error: (err) => console.error(err),
-      });
-    }
+    // if (!this.user) {
+    //   this.idxDB.read<IUserPayload>(StoreEnum.USER).subscribe({
+    //     next: (data) => {
+    //       if (data instanceof Array) {
+    //         this.user = data[0]
+    //       } else {
+    //         this.user = data
+    //       }
+    //     },
+    //     error: (err) => console.error(err),
+    //   });
+    // }
+    this.user = StorageHelper.getItem(StorageKeyEnum.User) as IUserPayload;
   }
 
   /**

@@ -1,10 +1,15 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {
   provideRouter,
   withDebugTracing,
   withRouterConfig,
+  withViewTransitions,
 } from '@angular/router';
 import { routes } from '@app/app.routes';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
@@ -29,6 +34,7 @@ export const appConfig: ApplicationConfig = {
      */
     provideRouter(
       routes,
+      withViewTransitions(),
       withDebugTracing(),
       withRouterConfig({
         paramsInheritanceStrategy: 'always',
@@ -39,7 +45,7 @@ export const appConfig: ApplicationConfig = {
     /**
      * Proveedor del cliente HTTP con interceptores.
      */
-    provideHttpClient(withInterceptors([authInterceptorFn])),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptorFn])),
     /**
      * Proveedor del cliente OAuth2.
      */
@@ -51,7 +57,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       BrowserModule,
       BrowserAnimationsModule,
-      NgxIndexedDBModule.forRoot(dbConfig), // Importa NgxIndexedDBModule y configúralo
+      NgxIndexedDBModule.forRoot(dbConfig) // Importa NgxIndexedDBModule y configúralo
       // NgxGistModule // Importa NgxGistModule
     ),
     provideLocale(), // custom method
