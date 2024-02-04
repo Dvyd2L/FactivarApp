@@ -92,6 +92,36 @@
               {{ item.unidades * item.pUnitario | currency : "EUR" }}
             </td>
           </tr>
+          } @if (i.desgloseIva.CERO.cuota > 0) {
+          <tr>
+            <th colspan="4">IVA 0%</th>
+            <td>{{ i.desgloseIva.CERO.cuota | currency : "EUR" }}</td>
+            <td>{{ i.desgloseIva.CERO.total | currency : "EUR" }}</td>
+          </tr>
+          } @if (i.desgloseIva.SUPERREDUCIDO.cuota > 0) {
+          <tr>
+            <th colspan="4">IVA 4%</th>
+            <td>{{ i.desgloseIva.SUPERREDUCIDO.cuota | currency : "EUR" }}</td>
+            <td>{{ i.desgloseIva.SUPERREDUCIDO.total | currency : "EUR" }}</td>
+          </tr>
+          } @if (i.desgloseIva.ESPECIAL.cuota > 0) {
+          <tr>
+            <th colspan="4">IVA 5%</th>
+            <td>{{ i.desgloseIva.ESPECIAL.cuota | currency : "EUR" }}</td>
+            <td>{{ i.desgloseIva.ESPECIAL.total | currency : "EUR" }}</td>
+          </tr>
+          } @if (i.desgloseIva.REDUCIDO.cuota > 0) {
+          <tr>
+            <th colspan="4">IVA 10%</th>
+            <td>{{ i.desgloseIva.REDUCIDO.cuota | currency : "EUR" }}</td>
+            <td>{{ i.desgloseIva.REDUCIDO.total | currency : "EUR" }}</td>
+          </tr>
+          } @if (i.desgloseIva.GENERAL.cuota > 0) {
+          <tr>
+            <th colspan="4">IVA 21%</th>
+            <td>{{ i.desgloseIva.GENERAL.cuota | currency : "EUR" }}</td>
+            <td>{{ i.desgloseIva.GENERAL.total | currency : "EUR" }}</td>
+          </tr>
           }
           <tr>
             <th colspan="4" style="text-align: right">Subtotal</th>

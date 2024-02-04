@@ -17,6 +17,8 @@ export interface IInvoice {
    * The invoice VAT amount.
    */
   iva: number;
+
+  desgloseIva: any;
   /**
    * The total amount of the invoice.
    */
@@ -45,6 +47,8 @@ export interface IInvoice {
    * The products included in the invoice.
    */
   articulos: IProduct[];
+
+  calculosIvas: any[]
 }
 
 /**
