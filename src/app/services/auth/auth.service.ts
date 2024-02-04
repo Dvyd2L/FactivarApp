@@ -47,7 +47,7 @@ export class AuthService {
             .getUser()
             .subscribe({ next: (data) => console.log(data) });
 
-          this.router.navigate(['/']);
+          this.router.navigate(['/clientes']);
         })
       );
   }
@@ -73,7 +73,7 @@ export class AuthService {
 
           // this.idxDB.create<IUserPayload>(user, StoreEnum.USER);
 
-          this.router.navigate(['/']);
+          this.router.navigate(['/clientes']);
         })
       );
   }
