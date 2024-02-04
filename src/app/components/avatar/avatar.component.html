@@ -3,7 +3,13 @@
   <p class="me-2 mt-2 textoGrande">
     Bienvenido, <b>{{ user.Name }}</b>
   </p>
-  <p-avatar pBadge [image]="user.Thumbprint" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+  <p-avatar
+    pBadge
+    [image]="user.Thumbprint"
+    styleClass="mr-2"
+    size="xlarge"
+    shape="circle"
+  ></p-avatar>
   <img class="avatar" [src]="user.Thumbprint" alt="Avatar de {{ user.Name }}" />
 
   <!-- Boton de salida -->
@@ -28,10 +34,12 @@
     <div class="text">Salir</div>
   </button> -->
   } @else {
-  <app-boton-accesos
-    texto="Iniciar sesión"
-    [routerLink]="['login']"
-    aria-label="Login"
-  />
+  <a href="/login">
+    <app-boton-accesos
+      texto="Iniciar sesión"
+      aria-label="Login"
+      />
+      <!-- [routerLink]="['login']" -->
+  </a>
   }
 </div>
