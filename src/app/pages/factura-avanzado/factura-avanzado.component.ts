@@ -19,7 +19,16 @@ import { FacturasService } from '@app/services/facturas.service';
   styleUrl: './factura-avanzado.component.css',
 })
 export class FacturaAvanzadoComponent {
-  nuevaFactu!: IFacturaNueva;
+  nuevaFactu: IFacturaNueva = {
+    numeroFactura : 0,
+    pendientePago:false,
+    descripcionOperacion:"",
+    fechaExpedicion:"",
+    fechaCobro:"",
+    clienteId:"",
+    proveedorId:"",
+    articulos: [],
+    };
   listaArticulos: IProduct[] = [];
   fecha = new Date().toISOString().split('T')[0];
   fechaCobro = new Date().toISOString().split('T')[0];

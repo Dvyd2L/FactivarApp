@@ -93,10 +93,11 @@ export class AvatarComponent {
    * Si el usuario ha iniciado sesión con una cuenta de correo electrónico, se realiza el cierre de sesión correspondiente.
    */
   public cerrarSesion() {
-    if (this.socialAuthService.getProfile()) {
-      this.socialAuthService.logout();
-    } else {
-      this.authService.logout({ email: this.user.Email });
-    }
+    // if (this.socialAuthService.getProfile()) {
+    //   this.socialAuthService.logout();
+    // } else {
+    //   this.authService.logout({ email: this.user.Email });
+    // }
+    this.authService.logout({ email: this.user.Email });
   }
 }

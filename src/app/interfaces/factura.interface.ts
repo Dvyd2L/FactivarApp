@@ -32,7 +32,7 @@ export interface IFacturaNueva {
   fechaExpedicion: string; // Fecha de expedición de la factura
   fechaCobro: string; // Fecha de cobro de la factura
   clienteId: string; // ID del cliente
-  proveedorId: string;
+  proveedorId: string; // ID del proveedor
   articulos: IProduct[]; // Artículos de la factura
 }
 
