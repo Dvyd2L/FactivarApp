@@ -1,15 +1,16 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ICliente } from 'src/app/interfaces/cliente.interface';
 import { ClientesService } from '@app/services/clientes.service';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ToastModule } from 'primeng/toast';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DataTableComponent } from '../../components/data-table/data-table.component';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
+import { DataTableComponent } from '@app/components/data-table/data-table.component';
 import { LoaderComponent } from '@app/components/loader/loader.component';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from "primeng/confirmdialog";
 
 @Component({
   selector: 'app-clientes',

@@ -3,7 +3,7 @@
  */
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { IFacturaResponse, IFactura } from '@app/interfaces/factura.interface';
+import { IFacturaResponse, IFactura, IFacturaNueva } from '@app/interfaces/factura.interface';
 import { environment } from '@environments/environment.development';
 import { Observable } from 'rxjs';
 
@@ -27,21 +27,31 @@ export class FacturasService {
    * @param factura La factura a agregar.
    * @returns Un Observable que emite un objeto IFactura.
    */
-  public addFactura(factura: IFactura): Observable<IFactura> {
-    console.log(new Date(factura.fecha).toLocaleDateString());
+  public addFactura(factura: IFacturaNueva): Observable<IFacturaNueva> {
+    console.log(new Date(factura.fechaExpedicion).toLocaleDateString());
 
     const datos = {
-      importe: factura.importe,
-      fecha:
-        new Date(factura.fecha).getFullYear() +
+      numeroFactura: factura.numeroFactura,
+      pendientePago: factura.pendientePago,
+      descripcionOperacion: factura.descripcionOperacion,
+      fechaExpedicion:
+        new Date(factura.fechaExpedicion).getFullYear() +
         '-' +
-        (new Date(factura.fecha).getMonth() + 1) +
+        (new Date(factura.fechaExpedicion).getMonth() + 1) +
         '-' +
-        new Date(factura.fecha).getDate(),
-      cliente: factura.cliente,
+        new Date(factura.fechaExpedicion).getDate(),
+      fechaCobro:
+        new Date(factura.fechaCobro).getFullYear() +
+        '-' +
+        (new Date(factura.fechaCobro).getMonth() + 1) +
+        '-' +
+        new Date(factura.fechaCobro).getDate(),
+      clienteId: factura.clienteId,
+      proveedorId: factura.proveedorId,
+      articulos: factura.articulos
     };
 
-    return this.http.post<IFactura>(`${this.urlAPI}facturas`, datos);
+    return this.http.post<IFacturaNueva>(`${this.urlAPI}facturas`, datos);
   }
 
   /**

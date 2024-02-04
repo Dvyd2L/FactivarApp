@@ -38,6 +38,7 @@
                     type="text"
                     name="proveedor"
                     id="proveedor"
+                    [(ngModel)] = "nuevaFactu.proveedorId"
                     required
                   />
                 </div>
@@ -57,6 +58,7 @@
                     value="100"
                     name="numeroFactura"
                     id="numeroFactura"
+                    [(ngModel)] = "nuevaFactu.numeroFactura"
                   />
                 </div>
               </div>
@@ -78,6 +80,7 @@
                     type="text"
                     name="comprador"
                     id="comprador"
+                    [(ngModel)] = "nuevaFactu.clienteId"
                     required
                   />
                 </div>
@@ -96,6 +99,7 @@
                     maxlength="5000"
                     name="descripcionOperacion"
                     id="descripcionOperacion"
+                    [(ngModel)] = "nuevaFactu.descripcionOperacion"
                   ></textarea>
                 </div>
               </div>

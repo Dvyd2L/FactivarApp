@@ -25,6 +25,17 @@ export interface IFacturaResponse {
   cliente: ICliente; // Cliente asociado a la factura
 }
 
+export interface IFacturaNueva {
+  numeroFactura: number; // Número de la factura
+  pendientePago: boolean; // Indica si la factura está pendiente de pago
+  descripcionOperacion: string; // Descripción de la operación
+  fechaExpedicion: string; // Fecha de expedición de la factura
+  fechaCobro: string; // Fecha de cobro de la factura
+  clienteId: string; // ID del cliente
+  proveedorId: string;
+  articulos: IProduct[]; // Artículos de la factura
+}
+
 // export interface IFacturaResponse {
 //   numeroFactura?: number;
 //   importe: number;
@@ -47,6 +58,7 @@ export interface IArticulo {
   iva: number; // IVA del artículo
 }
 import { ICliente } from './cliente.interface';
+import { IProduct } from './factivar';
 
 export interface IFactura {
   numeroFactura: number;

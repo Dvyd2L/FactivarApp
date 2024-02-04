@@ -1,13 +1,15 @@
 /**
  * Componente para la página de factura avanzada.
  */
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { ArticuloFacturaComponent } from '../../components/articulo-factura/articulo-factura.component';
 import { calculateImportes } from '@app/helpers/facturas.helper';
-import { FormsModule } from '@angular/forms';
 import { IProduct } from '@app/interfaces/factivar';
-import { IFacturaResponse } from '@app/interfaces/factura.interface';
+import { IFacturaNueva } from '@app/interfaces/factura.interface';
 import { DateTimeProvider } from 'angular-oauth2-oidc';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FacturasService } from '@app/services/facturas.service';
 
 @Component({
   selector: 'app-factura-avanzado',
@@ -17,11 +19,13 @@ import { DateTimeProvider } from 'angular-oauth2-oidc';
   styleUrl: './factura-avanzado.component.css',
 })
 export class FacturaAvanzadoComponent {
+  nuevaFactu!: IFacturaNueva;
   listaArticulos: IProduct[] = [];
   fecha = new Date().toISOString().split('T')[0];
   fechaCobro = new Date().toISOString().split('T')[0];
-  fechaCorrecta = false;
-  nuevaFactu!: IFacturaResponse;
+  fechaCorrecta = false; // false = pendiente de pago      true = no pendiente de pago
+
+  private facturasService = inject(FacturasService);
   /**
    * Referencia al contenedor de vista del componente ArticuloFactura.
    */
@@ -70,6 +74,11 @@ export class FacturaAvanzadoComponent {
   }
 
   crearFactura() {
-    console.log('creando factura');
+    this.nuevaFactu.pendientePago = !this.fechaCorrecta;
+    this.nuevaFactu.fechaExpedicion = this.fecha;
+    this.nuevaFactu.fechaCobro = this.fechaCobro;
+    this.nuevaFactu.articulos = this.listaArticulos;
+
+    this.facturasService.addFactura(this.nuevaFactu);
   }
 }
