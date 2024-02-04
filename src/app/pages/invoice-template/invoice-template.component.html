@@ -1,7 +1,5 @@
 <ng-container *ngIf="invoice$ | async as i">
-  <pre>
-    {{ i | json }}   
-  </pre>
+  <!-- <pre>{{ i | json}}</pre> -->
   <article class="container invoice" id="factura">
     <div class="row">
       <div class="col-xs-6">
@@ -11,12 +9,16 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4>
-              CIF :
-              <a href="#">{{ i.cliente.cif }}</a>
+              NOMBRE :
+              <a href="#">{{ i.proveedor.nombre }}</a>
+            </h4>
+            <h4>
+              DNI/CIF :
+              <a href="#">{{ i.proveedor.cif }}</a>
             </h4>
             <h4>
               DIRECCI&Oacute;N :
-              <a href="#">{{ i.cliente.direccion }}</a>
+              <a href="#">{{ i.proveedor.direccion }}</a>
             </h4>
           </div>
           <div class="panel-body">
@@ -55,7 +57,9 @@
         </div>
       </div>
       <pre></pre>
-      <table class="table table-bordered">
+      <table 
+      class="table table-light table-bordered"
+      >
         <thead>
           <tr>
             <th scope="col" style="text-align: center">

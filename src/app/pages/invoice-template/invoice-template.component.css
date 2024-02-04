@@ -16,7 +16,8 @@ a {
 .invoice {
   width: 21cm;
   height: 29.7cm;
-  background-color: whitesmoke;
+  background-color: white;
+  color: black;
   padding: 3rem;
   display: flex;
   flex-flow: column nowrap;

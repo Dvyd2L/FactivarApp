@@ -5,50 +5,19 @@ import { CuotasIvaEnum } from "./enums/cuotas-iva";
  */
 export interface IInvoice {
   facturaId: number;
-  /**
-   * The invoice number.
-   */
   numeroFactura: number;
-  /**
-   * The invoice amount.
-   */
   importe: number;
-  /**
-   * The invoice VAT amount.
-   */
   iva: number;
-
-  desgloseIva: any;
-  /**
-   * The total amount of the invoice.
-   */
-  total: number;
-  /**
-   * Indicates if the invoice payment is pending.
-   */
-  pendientePago: boolean;
-  /**
-   * The description of the operation.
-   */
-  descripcionOperacion: string;
-  /**
-   * The date of issuance of the invoice.
-   */
-  fechaExpedicion: string;
-  /**
-   * The date of payment of the invoice.
-   */
-  fechaCobro: string;
-  /**
-   * The customer associated with the invoice.
-   */
-  cliente: ICustomer;
-  /**
-   * The products included in the invoice.
-   */
-  articulos: IProduct[];
-
   calculosIvas: any[]
+  desgloseIva: any;
+  total: number;
+  pendientePago: boolean;
+  descripcionOperacion: string;
+  fechaExpedicion: string;
+  fechaCobro: string;
+  proveedor: ICustomer;
+  cliente: ICustomer;
+  articulos: IProduct[];
 }
 
 /**
