@@ -1,7 +1,5 @@
 <ng-container *ngIf="invoice$ | async as i">
-  <pre>
-    {{ i | json }}   
-  </pre>
+  <!-- <pre>{{ i | json}}</pre> -->
   <article class="container invoice" id="factura">
     <div class="row">
       <div class="col-xs-6">
@@ -11,12 +9,16 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4>
-              CIF :
-              <a href="#">{{ i.cliente.cif }}</a>
+              NOMBRE :
+              <a href="#">{{ i.proveedor.nombre }}</a>
+            </h4>
+            <h4>
+              DNI/CIF :
+              <a href="#">{{ i.proveedor.cif }}</a>
             </h4>
             <h4>
               DIRECCI&Oacute;N :
-              <a href="#">{{ i.cliente.direccion }}</a>
+              <a href="#">{{ i.proveedor.direccion }}</a>
             </h4>
           </div>
           <div class="panel-body">
@@ -55,7 +57,9 @@
         </div>
       </div>
       <pre></pre>
-      <table class="table table-bordered">
+      <table 
+      class="table table-light table-bordered"
+      >
         <thead>
           <tr>
             <th scope="col" style="text-align: center">
@@ -91,6 +95,36 @@
             <td class="text-right">
               {{ item.unidades * item.pUnitario | currency : "EUR" }}
             </td>
+          </tr>
+          } @if (i.desgloseIva.CERO.cuota > 0) {
+          <tr>
+            <th colspan="4">IVA 0%</th>
+            <td>{{ i.desgloseIva.CERO.cuota | currency : "EUR" }}</td>
+            <td>{{ i.desgloseIva.CERO.total | currency : "EUR" }}</td>
+          </tr>
+          } @if (i.desgloseIva.SUPERREDUCIDO.cuota > 0) {
+          <tr>
+            <th colspan="4">IVA 4%</th>
+            <td>{{ i.desgloseIva.SUPERREDUCIDO.cuota | currency : "EUR" }}</td>
+            <td>{{ i.desgloseIva.SUPERREDUCIDO.total | currency : "EUR" }}</td>
+          </tr>
+          } @if (i.desgloseIva.ESPECIAL.cuota > 0) {
+          <tr>
+            <th colspan="4">IVA 5%</th>
+            <td>{{ i.desgloseIva.ESPECIAL.cuota | currency : "EUR" }}</td>
+            <td>{{ i.desgloseIva.ESPECIAL.total | currency : "EUR" }}</td>
+          </tr>
+          } @if (i.desgloseIva.REDUCIDO.cuota > 0) {
+          <tr>
+            <th colspan="4">IVA 10%</th>
+            <td>{{ i.desgloseIva.REDUCIDO.cuota | currency : "EUR" }}</td>
+            <td>{{ i.desgloseIva.REDUCIDO.total | currency : "EUR" }}</td>
+          </tr>
+          } @if (i.desgloseIva.GENERAL.cuota > 0) {
+          <tr>
+            <th colspan="4">IVA 21%</th>
+            <td>{{ i.desgloseIva.GENERAL.cuota | currency : "EUR" }}</td>
+            <td>{{ i.desgloseIva.GENERAL.total | currency : "EUR" }}</td>
           </tr>
           }
           <tr>
