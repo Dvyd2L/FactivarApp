@@ -24,6 +24,7 @@
     <ul *ngIf="c.facturaClientes" class="facturas">
       @for (item of c.facturaClientes; track $index) {
       <li>
+        <p>Numero factura: {{ item.numeroFactura }}</p>
         <figure style="--c: #fff5">
           <img
             src="https://www.educadictos.com/wp-content/uploads/2014/02/Factura-Proforma.png"
@@ -72,6 +73,7 @@
     <ul *ngIf="c.facturaProveedors" class="facturas">
       @for (item of c.facturaProveedors; track $index) {
       <li>
+        <p>Numero factura: {{ item.numeroFactura }}</p>
         <figure style="--c: #fff5">
           <img
             src="https://www.educadictos.com/wp-content/uploads/2014/02/Factura-Proforma.png"

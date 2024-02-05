@@ -37,11 +37,13 @@ import { RouterLink } from '@angular/router';
 // import { StoreEnum } from '@app/interfaces/enums/store.enum';
 import { StorageHelper } from '@app/helpers/storage.helper';
 import { StorageKeyEnum } from '@app/interfaces/enums/storage.enum';
+import { UserService } from '@app/services/user.service';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-avatar',
   standalone: true,
-  imports: [BotonAccesosComponent, AvatarModule, BtnGrowComponent, RouterLink],
+  imports: [BotonAccesosComponent, AvatarModule, BtnGrowComponent, RouterLink, AsyncPipe, NgIf],
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.css',
   providers: [],
@@ -50,7 +52,7 @@ export class AvatarComponent {
   /**
    * Servicio para obtener los datos del usuario.
    */
-  // private userService = inject(UserService<IUserPayload>);
+  private userService = inject(UserService<IUserPayload>);
   /**
    * Servicio para gestionar la autenticación.
    */
@@ -64,6 +66,7 @@ export class AvatarComponent {
    * Datos del usuario actual.
    */
   public user!: IUserPayload;
+  public user$ = this.userService.user$;
 
   /**
    * Método que se ejecuta al inicializar el componente.

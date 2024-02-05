@@ -17,10 +17,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { authInterceptorFn } from '@app/interceptors/token-fn.interceptor';
 import localeEs from '@angular/common/locales/es';
 import { provideLocale } from './locale.config';
-import { NgxIndexedDBModule } from 'ngx-indexed-db';
-import { dbConfig } from './indexed-db.config';
 import { provideOAuthProvidersConfig } from './oauth.config';
 import { registerLocaleData } from '@angular/common';
+// import { NgxIndexedDBModule } from 'ngx-indexed-db';
+// import { dbConfig } from './indexed-db.config';
 // import { NgxGistModule } from '@proangular/ngx-gist';
 
 registerLocaleData(localeEs);
@@ -35,12 +35,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withViewTransitions(),
-      withDebugTracing(),
-      withRouterConfig({
-        paramsInheritanceStrategy: 'always',
-        onSameUrlNavigation: 'reload',
-        // urlUpdateStrategy: 'deferred',
-      })
+      // withDebugTracing(),
+      // withRouterConfig({
+      //   paramsInheritanceStrategy: 'always',
+      //   onSameUrlNavigation: 'reload',
+      //   // urlUpdateStrategy: 'deferred',
+      // })
     ),
     /**
      * Proveedor del cliente HTTP con interceptores.
@@ -57,8 +57,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       BrowserModule,
       BrowserAnimationsModule,
-      NgxIndexedDBModule.forRoot(dbConfig) // Importa NgxIndexedDBModule y configúralo
-      // NgxGistModule // Importa NgxGistModule
+      // NgxIndexedDBModule.forRoot(dbConfig) // Importa NgxIndexedDBModule y configúralo
     ),
     provideLocale(), // custom method
   ],
