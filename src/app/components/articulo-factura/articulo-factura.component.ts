@@ -35,7 +35,7 @@ export class ArticuloFacturaComponent {
     iva : 0
   };
 
- articles : IProduct[] = [];
+ @Input() articles : IProduct[] = [];
  cantidad = "";
 
 
@@ -50,7 +50,7 @@ export class ArticuloFacturaComponent {
 
   emiteArticle(){
     this.articulos.emit({...this.article});
-    this.articles.push({...this.article});
+    // this.articles.push({...this.article});
     this.article.unidades = 0;
     this.article.descripcion = "";
     this.article.pUnitario = 0;

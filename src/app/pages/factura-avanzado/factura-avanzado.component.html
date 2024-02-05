@@ -165,7 +165,7 @@
             <hr />
 
             <!-- Componente de artículo de factura -->
-            <app-articulo-factura (pacos)="removeArticle($event)" (articulos)="addArticulo($event)" />
+            <app-articulo-factura [articles]="listaArticulos" (pacos)="removeArticle($event)" (articulos)="addArticulo($event)" />
 
             <ng-template #articuloFactura> </ng-template>
 
@@ -230,3 +230,4 @@
   </div>
 </div>
 </div>
+<p-toast />

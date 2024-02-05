@@ -10,31 +10,36 @@ import { DateTimeProvider } from 'angular-oauth2-oidc';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FacturasService } from '@app/services/facturas.service';
-
+import { ToastModule } from 'primeng/toast';
+import { HttpErrorResponse } from '@angular/common/http';
+import { addMessage } from '@app/helpers/message.helper';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-factura-avanzado',
   standalone: true,
-  imports: [ArticuloFacturaComponent, FormsModule],
+  imports: [ArticuloFacturaComponent, FormsModule, ToastModule],
   templateUrl: './factura-avanzado.component.html',
   styleUrl: './factura-avanzado.component.css',
+  providers: [MessageService, FacturasService],
 })
 export class FacturaAvanzadoComponent {
   nuevaFactu: IFacturaNueva = {
-    numeroFactura : 0,
-    pendientePago:false,
-    descripcionOperacion:"",
-    fechaExpedicion:"",
-    fechaCobro:"",
-    clienteId:"",
-    proveedorId:"",
+    numeroFactura: 0,
+    pendientePago: false,
+    descripcionOperacion: '',
+    fechaExpedicion: '',
+    fechaCobro: '',
+    clienteId: '',
+    proveedorId: '',
     articulos: [],
-    };
+  };
   listaArticulos: IProduct[] = [];
   fecha = new Date().toISOString().split('T')[0];
   fechaCobro = new Date().toISOString().split('T')[0];
   fechaCorrecta = false; // false = pendiente de pago      true = no pendiente de pago
-
+  private errorMessage = addMessage;
   private facturasService = inject(FacturasService);
+  private messageService = inject(MessageService);
   /**
    * Referencia al contenedor de vista del componente ArticuloFactura.
    */
@@ -85,8 +90,33 @@ export class FacturaAvanzadoComponent {
     this.nuevaFactu.articulos = this.listaArticulos;
 
     this.facturasService.addFactura(this.nuevaFactu).subscribe({
-      next: (data) => console.log(data),
-      error: (err) => console.error(err),
-    })
+      next: (data) => {
+        console.log({ data });
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Registro Creado',
+          detail: 'Factura creada con éxito',
+        });
+      },
+      error: (err) => {
+        console.error({ err });
+        if (err instanceof HttpErrorResponse) {
+          this.errorMessage(err, this.messageService);
+        }
+      },
+    });
+
+    this.nuevaFactu = {
+      numeroFactura: 0,
+      pendientePago: false,
+      descripcionOperacion: '',
+      fechaExpedicion: '',
+      fechaCobro: '',
+      clienteId: '',
+      proveedorId: '',
+      articulos: [],
+    };
+
+    this.listaArticulos = [];
   }
 }
