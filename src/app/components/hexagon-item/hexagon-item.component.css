@@ -156,7 +156,8 @@
 .hex-content .title {
   display: block;
   font-family: "Open Sans", sans-serif;
-  font-size: 14px;
+  /* font-size: 14px; */
+  font-size: 1.25rem;
   letter-spacing: 1px;
   line-height: 24px;
   text-transform: uppercase;
