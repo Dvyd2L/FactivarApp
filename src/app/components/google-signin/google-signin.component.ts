@@ -19,15 +19,17 @@ export class GoogleSigninComponent {
    * Evento que se emite cuando se obtiene el token de identificación de Google.
    */
   @Output() idToken = new EventEmitter<string>();
-
   /**
    * Inicia sesión con Google.
    */
-  public loginWithGoogle() {
-    this.socialAuthService.initProviderLogin(OAuthProviderEnum.Google);
-    this.socialAuthService.login();
-    const googleIdToken = this.socialAuthService.getIdToken();
-    this.idToken.emit(googleIdToken);
+  public async loginWithGoogle() {
+    await this.socialAuthService
+      .initProviderLogin(OAuthProviderEnum.Google)
+      .then(() => {
+        this.socialAuthService.login();
+        const googleIdToken = this.socialAuthService.getIdToken();
+        this.idToken.emit(googleIdToken);
+      })
+      .catch((error) => console.error({ error }));
   }
 }
-
