@@ -37,29 +37,26 @@ export class AppComponent {
   /**
    * Título de la aplicación.
    */
-  title = 'FactivarApp';
-
+  public title = 'FactivarApp';
   /**
    * Verifica si la ruta actual es la página de inicio.
    * @returns `true` si la ruta actual es '/home', de lo contrario `false`.
    */
-  isHome() {
+  public isHome() {
     return window.location.pathname === '/home';
   }
-
   /**
    * Verifica si la ruta actual es la página de inicio de sesión.
    * @returns `true` si la ruta actual es '/login', de lo contrario `false`.
    */
-  isLogin() {
+  public isLogin() {
     return window.location.pathname === '/login';
   }
-
   /**
    * Verifica si la ruta actual es la página de registro.
    * @returns `true` si la ruta actual es '/register', de lo contrario `false`.
    */
-  isRegister() {
+  public isRegister() {
     return window.location.pathname === '/register';
   }
 }

@@ -20,19 +20,17 @@ export class InvoiceTemplateComponent implements OnInit {
   /**
    * Observable que contiene los datos de la factura.
    */
-  invoice$ = getDataByPk<IInvoice>('facturas');
-
+  public invoice$ = getDataByPk<IInvoice>('facturas');
   /**
    * Configuración para la generación del PDF.
    */
-  pdfConfig = {
+  public pdfConfig = {
     filename: '',
   };
-
   /**
    * Función para descargar el PDF.
    */
-  downloadPDF = pdfHelper;
+  public downloadPDF = pdfHelper;
 
   /**
    * Método que se ejecuta al inicializar el componente.
@@ -44,7 +42,7 @@ export class InvoiceTemplateComponent implements OnInit {
   /**
    * Obtiene la clave primaria de la factura y actualiza la configuración del PDF.
    */
-  getPk() {
+  public getPk() {
     this.invoice$.subscribe({
       next: (data) =>
         (this.pdfConfig.filename = `factivar_${data.numeroFactura}_${data.fechaExpedicion}.pdf`),
