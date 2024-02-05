@@ -1,7 +1,7 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
-import { calculateImporteIva } from '@app/helpers/facturas.helper';
+import { FormsModule } from '@angular/forms';
+// import { calculateImporteIva } from '@app/helpers/facturas.helper';
 import { IProduct } from '@app/interfaces/factivar';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';

@@ -6,8 +6,6 @@ import { ArticuloFacturaComponent } from '../../components/articulo-factura/arti
 import { calculateImportes } from '@app/helpers/facturas.helper';
 import { IProduct } from '@app/interfaces/factivar';
 import { IFacturaNueva } from '@app/interfaces/factura.interface';
-import { DateTimeProvider } from 'angular-oauth2-oidc';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FacturasService } from '@app/services/facturas.service';
 import { ToastModule } from 'primeng/toast';
