@@ -3,18 +3,19 @@
     class="col-2 form-label"
     aria-label="cantidad"
     for="invoice_items_attributes_0_quantity"
+
     >Cant.</label
   >
 
-  <label class="col-3 form-label" aria-label="descripcion">Descripción</label>
+  <label class="col-3 form-label" aria-label="descripcion" >Descripción</label>
 
-  <label class="col-2 form-label" aria-label="precio unitario"
+  <label class="col-2 form-label" aria-label="precio unitario" 
     >Precio unitario</label
   >
 
-  <label class="col-2 form-label" aria-label="importe">Importe</label>
+  <label class="col-2 form-label" aria-label="importe" >Importe</label>
 
-  <label class="col-2 form-label" aria-label="iva">Tipo de IVA</label>
+  <label class="col-2 form-label" aria-label="iva" >Tipo de IVA</label>
 
   <label class="col-1"></label>
 </div>
@@ -159,6 +160,7 @@
     class="btn btn-info btn-sm w-100"
     id="add-item"
     (click)="emiteArticle()"
+    aria-label="Añadir artículo"
   >
     Añadir artículo
   </button>
@@ -182,6 +184,7 @@
             class="form-control"
             contenteditable="false"
             style="width: auto"
+
           >
             {{ art.unidades }}
           </div>
@@ -193,6 +196,7 @@
             class="form-control"
             contenteditable="false"
             style="width: auto"
+
           >
             {{ art.descripcion }}
           </div>
@@ -204,6 +208,7 @@
             class="form-control"
             contenteditable="false"
             style="width: auto"
+
           >
             {{ art.pUnitario }}
           </div>
@@ -215,6 +220,7 @@
             class="form-control"
             contenteditable="false"
             style="width: auto"
+
           >
             {{ art.importe }}
           </div>
@@ -226,6 +232,7 @@
             class="form-control"
             contenteditable="false"
             style="width: auto"
+
           >
             {{ art.iva }}
           </div>

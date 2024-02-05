@@ -10,7 +10,7 @@
   <div class="row pb-4">
     <div class="col-lg-10 col-md-11 mx-auto">
       <div class="text-center">
-        <h1 class="fs-2 my-4">Nueva Factura</h1>
+        <h1 class="fs-2 my-4" tabindex="1">Nueva Factura</h1>
       </div>
 
       <div class="px-4">
@@ -31,13 +31,14 @@
                   <input
                     class="form-control form-control-sm"
                     placeholder="CIF del proveedor"
-                    tabindex="1"
+                    tabindex="2"
                     maxlength="10"
                     type="text"
                     name="proveedor"
                     id="proveedor"
                     [(ngModel)] = "nuevaFactu.proveedorId"
                     required
+                    aria-label="CIF del proveedor"
                   />
                 </div>
               </div>
@@ -49,7 +50,7 @@
                   <input
                     class="form-control form-control-sm"
                     placeholder="Número Factura"
-                    tabindex="4"
+                    tabindex="3"
                     maxlength="100"
                     size="100"
                     type="text"
@@ -57,6 +58,7 @@
                     name="numeroFactura"
                     id="numeroFactura"
                     [(ngModel)] = "nuevaFactu.numeroFactura"
+                    aria-label="Número de factura"
                   />
                 </div>
               </div>
@@ -73,13 +75,14 @@
                   <input
                     class="form-control form-control-sm"
                     placeholder="CIF del cliente"
-                    tabindex="1"
+                    tabindex="4"
                     maxlength="10"
                     type="text"
                     name="comprador"
                     id="comprador"
                     [(ngModel)] = "nuevaFactu.clienteId"
                     required
+                    aria-label="CIF del cliente"
                   />
                 </div>
 
@@ -93,11 +96,12 @@
                     placeholder=" (Campo opcional)"
                     rows="5"
                     style="height: 8em"
-                    tabindex="3"
+                    tabindex="5"
                     maxlength="5000"
                     name="descripcionOperacion"
                     id="descripcionOperacion"
                     [(ngModel)] = "nuevaFactu.descripcionOperacion"
+                    aria-label="Descripción de la operación"
                   ></textarea>
                 </div>
               </div>
@@ -112,7 +116,7 @@
                   <input
                     class="form-control form-control-sm datepicker hasDatepicker"
                     placeholder="dd.mm.aa"
-                    tabindex="5"
+                    tabindex="6"
                     maxlength="100"
                     autocomplete="off"
                     size="100"
@@ -122,6 +126,7 @@
                     id="FechaEmision"
                     readonly
                     disabled="true"
+                    aria-label="Fecha de emisión"
                   />
                 </div>
 
@@ -135,8 +140,10 @@
                     class="form-control form-control-sm datepicker hasDatepicker"
                     id="fechaCobro"
                     name="fechaCobro"
+                    tabindex="7"
                     [(ngModel)]="fechaCobro"
                     (ngModelChange)="comprobarFecha()"
+                    aria-label="Fecha de cobro"
                   />
                 </div>
 
@@ -150,6 +157,8 @@
                     id="pendientePago"
                     name="pendientePago"
                     [(ngModel)]="fechaCorrecta"
+                    aria-label="Pendiente de pago"
+                    tabindex="8"
                   >
                     <option value="true">No</option>
                     <option value="false">Sí</option>
@@ -185,18 +194,18 @@
             <!-- Sección de subtotal y total de la factura -->
             <div id="total">
               <div class="row mt-4">
-                <div class="col-6 col-md-3 offset-md-6 fs-6 fw-bold">
+                <div class="col-6 col-md-3 offset-md-6 fs-6 fw-bold" aria-label="Subtotal">
                   Subtotal
                 </div>
-                <div class="col-6 col-md-3 text-end fs-6 fw-bold">{{ricias.subTotal}} €</div>
+                <div class="col-6 col-md-3 text-end fs-6 fw-bold" attr.aria-label="{{ricias.subTotal}} euros">{{ricias.subTotal}} €</div>
               </div>
 
               <div class="row my-4">
-                <div class="col-6 col-md-3 offset-md-6 fs-5 fw-bold">
+                <div class="col-6 col-md-3 offset-md-6 fs-5 fw-bold" aria-label="Total">
                   <p>TOTAL</p>
                 </div>
 
-                <div class="col-6 col-md-3 text-end fs-5 fw-bold">
+                <div class="col-6 col-md-3 text-end fs-5 fw-bold" attr.aria-label="{{ricias.importeTotal}} euros">
                   <p data-placement="left">{{ricias.importeTotal}} €</p>
                   <span data-placement="left" style="font-size: 10px">
                     IVA/incl.
@@ -207,15 +216,21 @@
           </form>
         </div>
       </div>
+
+      <div style="text-align: right; padding-right: 45px;">
+      <!-- class="btn btn-info btn-sm w-100" -->
       <button
       name="button"
       type="button"
-      class="btn btn-info btn-sm w-100"
+      class="btn btn-info btn-sm"
       id="add-item"
       (click)="crearFactura()"
+      aria-label="Añadir Factura"
     >
       Añadir Factura
     </button>
+  </div>
+  
     </div>
   </div>
 </div>
