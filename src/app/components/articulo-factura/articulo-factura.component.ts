@@ -67,6 +67,6 @@ export class ArticuloFacturaComponent {
 
   removeArticle(art: number) {
     this.pacos.emit(art);
-    this.articles.splice(art,1);
+    // this.articles.splice(art,1);
   }
 }
