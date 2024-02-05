@@ -20,7 +20,7 @@
 
     <hr />
 
-    <h6 class="card-text">Facturas Compradas</h6>
+    <h6 class="card-subtitle mb-4 text-body-secondary">Facturas Compradas</h6>
     <ul *ngIf="c.facturaClientes" class="facturas">
       @for (item of c.facturaClientes; track $index) {
       <li>
@@ -68,7 +68,7 @@
 
     <hr />
 
-    <h6 class="card-text">Facturas Vendidas</h6>
+    <h6 class="card-subtitle mb-4 text-body-secondary">Facturas Vendidas</h6>
     <ul *ngIf="c.facturaProveedors" class="facturas">
       @for (item of c.facturaProveedors; track $index) {
       <li>
