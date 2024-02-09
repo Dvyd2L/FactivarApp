@@ -7,9 +7,9 @@ import { OAUTH_CONFIG } from './tokens/oauth-conection.token';
  */
 const googleOAuthConfig: AuthConfig = {
   issuer: 'https://accounts.google.com',
-  redirectUri: window.location.origin,
+  redirectUri: window.location.origin + '/home',
   strictDiscoveryDocumentValidation: false,
-  clientId: environment.googleClient.id,
+  clientId: environment.googleClient.client_id,
   scope: 'openid profile email',
 };
 /**

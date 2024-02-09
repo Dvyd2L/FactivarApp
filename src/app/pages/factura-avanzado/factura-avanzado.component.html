@@ -62,7 +62,6 @@
               </div>
 
               <!-- Sección de datos del cliente y descripción de la operación -->
-
               <div class="col-8">
                 <div class="my-2">
                   <label for="comprador" class="form-label"
@@ -165,24 +164,9 @@
             <hr />
 
             <!-- Componente de artículo de factura -->
-            <app-articulo-factura (pacos)="removeArticle($event)" (articulos)="addArticulo($event)" />
+            <app-articulo-factura [articles]="listaArticulos" (pacos)="removeArticle($event)" (articulos)="addArticulo($event)" />
 
             <ng-template #articuloFactura> </ng-template>
-
-            <!-- Botón para añadir un nuevo artículo -->
-            <div class="row">
-              <div class="col-12">
-                <!-- <button
-                  name="button"
-                  type="button"
-                  class="btn btn-info btn-sm w-100"
-                  id="add-item"
-                  (click)="addArticle()"
-                >
-                  Añadir artículo nuevo
-                </button> -->
-              </div>
-            </div>
 
             <hr />
 
@@ -213,7 +197,6 @@
       </div>
 
       <div style="text-align: right; padding-right: 45px;">
-      <!-- class="btn btn-info btn-sm w-100" -->
       <button
       name="button"
       type="button"
@@ -230,3 +213,4 @@
   </div>
 </div>
 </div>
+<p-toast />

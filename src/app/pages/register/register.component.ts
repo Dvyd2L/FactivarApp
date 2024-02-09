@@ -9,7 +9,6 @@ import { PasswordInputComponent } from '../../components/password-input/password
 import { ToastModule } from 'primeng/toast';
 import { HttpErrorResponse } from '@angular/common/http';
 import { addMessage } from '@app/helpers/message.helper';
-
 /**
  * Componente de registro de usuarios.
  */
@@ -28,11 +27,11 @@ import { addMessage } from '@app/helpers/message.helper';
   providers: [MessageService, AuthService, Router],
 })
 export class RegisterComponent {
+  @ViewChild('fRegister') fRegister!: NgForm;
   private router = inject(Router);
   private auth = inject(AuthService);
   private messageService = inject(MessageService);
-  @ViewChild('fRegister') fRegister!: NgForm;
-  infoRegister: IRegisterUser = {
+  public infoRegister: IRegisterUser = {
     nombre: '',
     apellidos: '',
     avatar: undefined,
@@ -40,42 +39,36 @@ export class RegisterComponent {
     telefono: '',
     password: '',
   };
-  password: string = '';
-  
-  private errorMessage = addMessage
+  public password: string = '';
   /**
    * Establece la contraseña del usuario.
    * @param input - Contraseña ingresada por el usuario.
    */
-  setPassword(input: string) {
+  public setPassword(input: string) {
     this.infoRegister.password = input;
   }
-
   /**
    * Establece la contraseña de repetición del usuario.
    * @param input - Contraseña de repetición ingresada por el usuario.
    */
-  setRepeatPassword(input: string) {
+  public setRepeatPassword(input: string) {
     this.password = input;
   }
-
   /**
    * Maneja el evento de selección de archivo.
    * @param event - Evento de selección de archivo.
    */
-  onFileSelected(event: Event) {
+  public onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement)?.files?.[0];
 
     if (file) {
       this.infoRegister.avatar = file;
     }
   }
-
-
   /**
    * Realiza el registro del usuario.
    */
-  register() {
+  public register() {
     this.auth.register(this.infoRegister).subscribe({
       next: (data) => {
         console.log(data);
@@ -88,13 +81,18 @@ export class RegisterComponent {
       },
     });
   }
-
   /**
    * Valida si la contraseña y la contraseña de repetición coinciden.
    */
-  validPass() {
+  public validPass() {
     if (this.infoRegister.password !== this.password) {
       console.log('Las contraseñas no coinciden');
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Las contraseñas no coinciden',
+      });
     }
   }
+  private errorMessage = addMessage;
 }

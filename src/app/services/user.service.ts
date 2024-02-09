@@ -14,7 +14,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService<T extends { Sid: UUID; token: string }> {
-  private idxDB = inject(IndexedDBService);
+  // private idxDB = inject(IndexedDBService);
   private currentUserSubject = new BehaviorSubject<T>(null!);
   public user$ = this.currentUserSubject.asObservable();
 
@@ -51,9 +51,9 @@ export class UserService<T extends { Sid: UUID; token: string }> {
    */
   public updateUser(user: T) {
     StorageHelper.setItem(StorageKeyEnum.User, user);
-    this.userValue
-      ? this.idxDB.create<T>(user, StoreEnum.USER)
-      : this.idxDB.update<T>(user, StoreEnum.USER);
+    // this.userValue
+    //   ? this.idxDB.create<T>(user, StoreEnum.USER)
+    //   : this.idxDB.update<T>(user, StoreEnum.USER);
     this.currentUserSubject.next(user);
   }
 
@@ -62,7 +62,7 @@ export class UserService<T extends { Sid: UUID; token: string }> {
    */
   public clearUser() {
     StorageHelper.removeItem(StorageKeyEnum.User);
-    this.idxDB.delete<T>(this.userValue.Sid, StoreEnum.USER);
+    // this.idxDB.delete<T>(this.userValue.Sid, StoreEnum.USER);
     this.currentUserSubject.next(null!);
   }
 }

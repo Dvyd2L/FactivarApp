@@ -6,6 +6,8 @@ import { OAUTH_CONFIG } from 'src/config/tokens/oauth-conection.token';
 import { StorageHelper } from '@app/helpers/storage.helper';
 import { StorageKeyEnum } from '@app/interfaces/enums/storage.enum';
 import { OAuthProviderEnum } from '@app/interfaces/enums/oauth-providers.enum';
+import { IGoogleProfile } from '@app/interfaces/google-profile';
+import { RolesEnum } from '@app/interfaces/enums/roles.enum';
 
 /**
  * Servicio para autenticación social.
@@ -18,15 +20,16 @@ export class SocialAuthService {
   private oauth = inject(OAuthService);
   private userService = inject(UserService<IUserPayload>);
 
-  public initProviderLogin(provider: OAuthProviderEnum) {
-    const config = this.config[provider];
-
-    if (config) {
-      this.initLogin(config);
-    } else {
-      // TODO: Manejar error -> Configuración no encontrada
-      throw new Error('Configuración no encontrada');
-    }
+  public initProviderLogin(provider: OAuthProviderEnum):Promise<void> {
+    return new Promise((resolve, reject) => {
+      const config = this.config[provider];
+      
+      if (config) {
+        resolve(this.initLogin(config));
+      } else {
+        reject(new Error('Configuración no encontrada'))
+      }
+    })
   }
   /**
    * Inicia el flujo de inicio de sesión.
@@ -34,6 +37,19 @@ export class SocialAuthService {
   public login() {
     this.oauth.initLoginFlow();
     StorageHelper.setItem(StorageKeyEnum.OAuth2, this.getIdToken());
+    const user = this.getProfile() as IGoogleProfile;
+    this.userService.updateUser({
+      aud: user.aud,
+      iss: user.iss,
+      exp: user.exp,
+      token: this.getIdToken(),
+      Sid: crypto.randomUUID(),
+      Email: user.email,
+      Name: user.name,
+      Role: RolesEnum.User,
+      Surname: user.family_name,
+      Thumbprint: user.picture,
+    })
   }
   /**
    * Cierra la sesión actual.

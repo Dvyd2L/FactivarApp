@@ -18,33 +18,87 @@
     </p>
     <p class="card-text">Dirección: {{ c.direccion }}</p>
 
-    <ul *ngIf="c.facturaClientes">
+    <hr />
+
+    <h6 class="card-subtitle mb-4 text-body-secondary">Facturas Compradas</h6>
+    <ul *ngIf="c.facturaClientes" class="facturas">
       @for (item of c.facturaClientes; track $index) {
       <li>
         <p>Numero factura: {{ item.numeroFactura }}</p>
+        <figure style="--c: #fff5">
+          <img
+            src="https://www.educadictos.com/wp-content/uploads/2014/02/Factura-Proforma.png"
+            alt="Invoice"
+          />
+          <figcaption>
+            <p>Numero factura: {{ item.numeroFactura }}</p>
+            <p>Descripción Operación: {{ item.descripcionOperacion }}</p>
+            <p>Fecha Expedición: {{ item.fechaExpedicion | date }}</p>
+            <p>Fecha Cobro: {{ item.fechaCobro | date }}</p>
+            <p>Pendiente Pago: {{ item.pendientePago ? "SI" : "NO" }}</p>
+            <!-- <p>Total: {{ item.total | currency }}</p> -->
+          </figcaption>
+        </figure>
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="verFactura(item.facturaId)"
+        >
+          Ver factura
+        </button>
+
+        <!-- <p>Numero factura: {{ item.numeroFactura }}</p>
         <p>Descripción Operación: {{ item.descripcionOperacion }}</p>
         <p>Fecha Expedición: {{ item.fechaExpedicion | date }}</p>
         <p>Fecha Cobro: {{ item.fechaCobro | date }}</p>
         <p>Pendiente Pago: {{ item.pendientePago ? "SI" : "NO" }}</p>
-        <!-- <p>Total: {{ item.total | currency }}</p> -->
-        <button class="btn btn-success" type="button" (click)="verFactura(item.facturaId)">Ver factura</button>
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="verFactura(item.facturaId)"
+        >
+        Ver factura
+      </button>
+    </li> -->
+        <!-- <pre>{{ item | json }}</pre> -->
       </li>
-      <!-- <pre>{{ item | json }}</pre> -->
+      } @empty {
+      <p>No hay datos.</p>
       }
     </ul>
-    
-    <ul *ngIf="c.facturaProveedors">
+
+    <hr />
+
+    <h6 class="card-subtitle mb-4 text-body-secondary">Facturas Vendidas</h6>
+    <ul *ngIf="c.facturaProveedors" class="facturas">
       @for (item of c.facturaProveedors; track $index) {
-        <li>
-          <p>Numero factura: {{ item.numeroFactura }}</p>
-          <p>Descripción Operación: {{ item.descripcionOperacion }}</p>
-          <p>Fecha Expedición: {{ item.fechaExpedicion | date }}</p>
-          <p>Fecha Cobro: {{ item.fechaCobro | date }}</p>
-          <p>Pendiente Pago: {{ item.pendientePago ? "SI" : "NO" }}</p>
-          <!-- <p>Total: {{ item.total | currency }}</p> -->
-          <button class="btn btn-success" type="button" (click)="verFactura(item.facturaId)">Ver factura</button>
-        </li>
-        <!-- <pre>{{ item | json }}</pre> -->
+      <li>
+        <p>Numero factura: {{ item.numeroFactura }}</p>
+        <figure style="--c: #fff5">
+          <img
+            src="https://www.educadictos.com/wp-content/uploads/2014/02/Factura-Proforma.png"
+            alt="Invoice"
+          />
+          <figcaption>
+            <p>Numero factura: {{ item.numeroFactura }}</p>
+            <p>Descripción Operación: {{ item.descripcionOperacion }}</p>
+            <p>Fecha Expedición: {{ item.fechaExpedicion | date }}</p>
+            <p>Fecha Cobro: {{ item.fechaCobro | date }}</p>
+            <p>Pendiente Pago: {{ item.pendientePago ? "SI" : "NO" }}</p>
+          </figcaption>
+        </figure>
+        <!-- <p>Total: {{ item.total | currency }}</p> -->
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="verFactura(item.facturaId)"
+        >
+          Ver factura
+        </button>
+      </li>
+      <!-- <pre>{{ item | json }}</pre> -->
+      } @empty {
+      <p>No hay datos.</p>
       }
     </ul>
   </div>
