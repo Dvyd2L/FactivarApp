@@ -1,3 +1,6 @@
+/**
+ * Componente para la página de factura avanzada.
+ */
 import { Component, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { ArticuloFacturaComponent } from '../../components/articulo-factura/articulo-factura.component';
 import { calculateImportes } from '@app/helpers/facturas.helper';
@@ -18,14 +21,7 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService, FacturasService],
 })
 export class FacturaAvanzadoComponent {
-  /**
-   * Referencia al contenedor de vista del componente ArticuloFactura.
-   */
-  @ViewChild('articuloFactura', { read: ViewContainerRef })
-  private facturasService = inject(FacturasService);
-  private messageService = inject(MessageService);
-  private errorMessage = addMessage;
-  public nuevaFactu: IFacturaNueva = {
+  nuevaFactu: IFacturaNueva = {
     numeroFactura: 0,
     pendientePago: false,
     descripcionOperacion: '',
@@ -35,43 +31,71 @@ export class FacturaAvanzadoComponent {
     proveedorId: '',
     articulos: [],
   };
-  public listaArticulos: IProduct[] = [];
-  public fecha = new Date().toISOString().split('T')[0];
-  public fechaCobro = new Date().toISOString().split('T')[0];
-  public fechaCorrecta = false; // false = pendiente de pago      true = no pendiente de pago
-  public articuloFactura!: ViewContainerRef;
-  public ricias = {
+  listaArticulos: IProduct[] = [];
+  fecha = new Date().toISOString().split('T')[0];
+  fechaCobro = new Date().toISOString().split('T')[0];
+  fechaCorrecta = false; // false = pendiente de pago      true = no pendiente de pago
+  private errorMessage = addMessage;
+  private facturasService = inject(FacturasService);
+  private messageService = inject(MessageService);
+  /**
+   * Referencia al contenedor de vista del componente ArticuloFactura.
+   */
+  @ViewChild('articuloFactura', { read: ViewContainerRef })
+  articuloFactura!: ViewContainerRef;
+
+  ricias = {
     subTotal: 0,
     importeTotal: 0,
   };
+  /**
+   * Agrega un artículo al componente ArticuloFactura.
+   */
+  // addArticle() {
+  //   this.articuloFactura.createComponent(ArticuloFacturaComponent);
+  // }
 
-  public addArticulo(item: IProduct) {
+  addArticulo(item: IProduct) {
     this.listaArticulos.push(item);
     this.ricias = calculateImportes(this.listaArticulos);
   }
 
-  public comprobarFecha() {
+  comprobarFecha() {
     this.fechaCorrecta = this.fechaCobro >= this.fecha;
   }
+  /**
+   * Elimina el artículo del componente ArticuloFactura.
+   */
+  // removeArticle(item: IProduct) {
+  //   console.log(this.listaArticulos);
+  //   this.listaArticulos = this.listaArticulos.filter(p => {
+  //     console.log(p.descripcion !== item.descripcion);
+  //     return p.descripcion !== item.descripcion;
+  //   });
+  //   console.log(this.listaArticulos);
+  //   this.ricias = calculateImportes(this.listaArticulos);
+  // }
 
-  public removeArticle(item: number) {
+  removeArticle(item: number) {
     this.listaArticulos.splice(item, 1);
     this.ricias = calculateImportes(this.listaArticulos);
   }
 
-  public crearFactura() {
+  crearFactura() {
     this.nuevaFactu.pendientePago = !this.fechaCorrecta;
     this.nuevaFactu.fechaExpedicion = this.fecha;
     this.nuevaFactu.fechaCobro = this.fechaCobro;
     this.nuevaFactu.articulos = this.listaArticulos;
 
     this.facturasService.addFactura(this.nuevaFactu).subscribe({
-      next: (data) =>
+      next: (data) => {
+        console.log({ data });
         this.messageService.add({
           severity: 'success',
           summary: 'Registro Creado',
           detail: 'Factura creada con éxito',
-        }),
+        });
+      },
       error: (err) => {
         console.error({ err });
         if (err instanceof HttpErrorResponse) {
