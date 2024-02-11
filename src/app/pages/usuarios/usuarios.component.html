@@ -1,5 +1,6 @@
+@if (users$ | async; as u) {
 <div class="container" style="display: flex; flex-flow: row wrap; gap: 1rem">
-  @for (user of users$ | async; track $index) { @defer (on timer(1s)) {
+  @for (user of u; track $index) { @defer (on timer(1s)) {
   <article class="card mb-2" style="width: 20dvw">
     <div class="card-body">
       <header>
@@ -38,3 +39,4 @@
   </article>
   } }
 </div>
+}
