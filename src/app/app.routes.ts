@@ -43,7 +43,7 @@ export const routes: Routes = [
           ),
       },
       {
-        path: ':pk',
+        path: ':id',
         title: 'Detalles del Cliente | Factivar',
         loadComponent: () =>
           import('./pages/detail-customer/detail-customer.component').then(
@@ -51,15 +51,6 @@ export const routes: Routes = [
           ),
       },
     ],
-  },
-  {
-    path: 'usuarios',
-    title: 'Usuarios | Factivar',
-    canActivate: [adminGuard],
-    loadComponent: () =>
-      import('./pages/usuarios/usuarios.component').then(
-        (c) => c.UsuariosComponent
-      ),
   },
   {
     path: 'facturas',
@@ -74,7 +65,7 @@ export const routes: Routes = [
           ),
       },
       {
-        path: ':pk',
+        path: ':id',
         title: 'Detalles de la Factura | Factivar',
         loadComponent: () =>
           import('./pages/invoice-template/invoice-template.component').then(
@@ -82,6 +73,15 @@ export const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: 'usuarios',
+    title: 'Usuarios | Factivar',
+    canActivate: [adminGuard],
+    loadComponent: () =>
+      import('./pages/usuarios/usuarios.component').then(
+        (c) => c.UsuariosComponent
+      ),
   },
   {
     path: '404',

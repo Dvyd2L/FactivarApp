@@ -28,6 +28,6 @@ export class DetailCustomerComponent {
    * Observable que contiene los datos del cliente.
    */
   public customer$ = getDataByPk<ICustomer>('clientes');
-  public verFactura = (pk: number) =>
-    this.router.navigate(['facturas', 'detail', pk]);
+  public verFactura = (id: number) =>
+    this.router.navigate(['facturas', id]);
 }
