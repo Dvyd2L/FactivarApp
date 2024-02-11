@@ -32,7 +32,7 @@ import { AuthService } from '@app/services/auth/auth.service';
 import { AvatarModule } from 'primeng/avatar';
 // import { AvatarGroupModule } from 'primeng/avatargroup';
 import { BtnGrowComponent } from '../btn-grow/btn-grow.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 // import { IndexedDBService } from '@app/db/indexed-db.service';
 // import { StoreEnum } from '@app/interfaces/enums/store.enum';
 import { StorageHelper } from '@app/helpers/storage.helper';
@@ -43,67 +43,35 @@ import { AsyncPipe, NgIf } from '@angular/common';
 @Component({
   selector: 'app-avatar',
   standalone: true,
-  imports: [BotonAccesosComponent, AvatarModule, BtnGrowComponent, RouterLink, AsyncPipe, NgIf],
+  imports: [
+    BotonAccesosComponent,
+    AvatarModule,
+    BtnGrowComponent,
+    RouterLink,
+    AsyncPipe,
+    NgIf,
+  ],
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.css',
-  providers: [],
+  providers: [Router, AuthService, UserService<IUserPayload>],
 })
 export class AvatarComponent {
-  /**
-   * Servicio para obtener los datos del usuario.
-   */
-  private userService = inject(UserService<IUserPayload>);
-  /**
-   * Servicio para gestionar la autenticación.
-   */
-  // private idxDB = inject(IndexedDBService);
-  private authService = inject(AuthService);
-  /**
-   * Servicio para gestionar la autenticación social.
-   */
-  // private socialAuthService = inject(SocialAuthService);
-  /**
-   * Datos del usuario actual.
-   */
+  private userSvc = inject(UserService<IUserPayload>);
+  private auth = inject(AuthService);
+  private router = inject(Router);
+
   public user!: IUserPayload;
-  public user$ = this.userService.user$;
+  public user$ = this.userSvc.user$;
 
-  /**
-   * Método que se ejecuta al inicializar el componente.
-   * Suscribe al Observable del usuario para obtener los datos del usuario actual.
-   */
   ngOnInit(): void {
-    // this.userService.getUser().subscribe({
-    //   next: (data) => (this.user = data),
-    //   error: (err) => console.error(err),
-    // });
-
-    // if (!this.user) {
-    //   this.idxDB.read<IUserPayload>(StoreEnum.USER).subscribe({
-    //     next: (data) => {
-    //       if (data instanceof Array) {
-    //         this.user = data[0]
-    //       } else {
-    //         this.user = data
-    //       }
-    //     },
-    //     error: (err) => console.error(err),
-    //   });
-    // }
     this.user = StorageHelper.getItem(StorageKeyEnum.User) as IUserPayload;
   }
 
-  /**
-   * Método para cerrar la sesión del usuario.
-   * Si el usuario ha iniciado sesión con una cuenta social, se realiza el cierre de sesión correspondiente.
-   * Si el usuario ha iniciado sesión con una cuenta de correo electrónico, se realiza el cierre de sesión correspondiente.
-   */
   public cerrarSesion() {
-    // if (this.socialAuthService.getProfile()) {
-    //   this.socialAuthService.logout();
-    // } else {
-    //   this.authService.logout({ email: this.user.Email });
-    // }
-    this.authService.logout({ email: this.user.Email });
+    this.auth.logout({ email: this.user.Email });
+    this.userSvc.clearUser();
+    this.user = null!
+    StorageHelper.removeItem(StorageKeyEnum.User);
+    this.router.navigate(['/login']);
   }
 }

@@ -30,35 +30,28 @@ import { ToastModule } from 'primeng/toast';
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  providers: [MessageService, AuthService],
+  providers: [MessageService, AuthService, Router],
 })
 export class LoginComponent {
+  private router = inject(Router);
   private auth = inject(AuthService);
   private messageService = inject(MessageService);
-  /**
-   * Información de inicio de sesión.
-   */
-  infoLogin: ILoginUser = {
+
+  public infoLogin: ILoginUser = {
     email: '',
     password: '',
   };
-
-  private errorMessage = addMessage;
-
   /**
    * Establece la contraseña del usuario.
    * @param value - Valor de la contraseña.
    */
-  setPassword(value: string) {
+  public setPassword(value: string) {
     this.infoLogin.password = value;
   }
 
-  /**
-   * Realiza el inicio de sesión.
-   */
-  login() {
+  public login() {
     this.auth.login(this.infoLogin).subscribe({
-      next: (data) => console.log({ data }),
+      next: (data) => this.router.navigate(['/clientes']),
       error: (err) => {
         console.error({ err });
 
@@ -68,12 +61,12 @@ export class LoginComponent {
       },
     });
   }
-
   /**
    * Realiza el inicio de sesión con Google.
    * @param idToken - Token de identificación de Google.
    */
-  loginWithGoogle(idToken: string) {
+  public loginWithGoogle(idToken: string) {
     this.auth.loginWithGoogle(idToken);
   }
+  private errorMessage = addMessage;
 }
