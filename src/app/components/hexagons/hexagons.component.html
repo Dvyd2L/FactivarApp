@@ -2,48 +2,38 @@
   <a
     title="Inicio"
     class="navbar-brand cursiv"
-    href="/home" 
+    [routerLink]="['/home']"
     routerLinkActive="active"
-    >
-    <!-- [routerLink]="['home']" -->
+  >
+    <!-- href="/home"  -->
     <app-factivar-brand class="logo-factivar" />
   </a>
 
   <nav class="navigation">
-    <a href="/clientes">
     <app-hexagon-item
       title="Clientes"
+      [route]="['/clientes']"
       aria-label="Clientes"
-      [routerLink]="['clientes']"
-      routerLinkActive="active"
     >
-      <!-- (click)="toClientes()" -->
       <!-- los slots se invocan con el nombre del select de ng-content sin el punto. -->
       <i class="fa fa-bullseye slot-icon"></i>
     </app-hexagon-item>
-    </a>
-    <a href="/facturas">
+
     <app-hexagon-item
       title="Facturas"
+      [route]="['/facturas']"
       aria-label="Facturas"
-      [routerLink]="['facturas']"
-      routerLinkActive="active"
     >
-      <!-- (click)="toFacturas()" -->
       <i class="fa fa-braille slot-icon"></i>
     </app-hexagon-item>
-    </a>
-    <a href="/usuarios">
+
     <app-hexagon-item
       title="Usuarios"
+      [route]="['/usuarios']"
       aria-label="Usuarios"
-      [routerLink]="['usuarios']"
-      routerLinkActive="active"
     >
-      <!-- (click)="toUsuarios()" -->
       <i class="fa fa-id-badge slot-icon"></i>
     </app-hexagon-item>
-    </a>
   </nav>
 
   <menu class="menu">

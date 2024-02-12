@@ -47,12 +47,15 @@ border-width: 40px 40px 40px 40px;
 filter: drop-shadow(5px 0 4px #00000094);
 transition: filter .5s;
 }
+
 .item:nth-child(2) {
     --color: #813085;
 }
+
 .item:nth-child(3){
     --color:#119630;
 }
+
 .layer {
    background-color: #f2f2f2;
    border: 1px solid #fff;
@@ -69,20 +72,24 @@ transition: filter .5s;
    left: 10px;
    transition: left 1s;
 }
+
 h3 {
     font-weight: 700;
     text-align: center;
     color: var(--color);
 }
+
 h4{
     color: #fff;
     text-align: center;
     font-size: 14px;
     padding-top: 10px;
 }
+
 p{
     color: #555;
 }
+
 span{
     width: 40px;
     height: 40px;
@@ -103,10 +110,12 @@ span{
    right: 5px;
    bottom: 5px;
 }
+
 .item:hover::after{
     filter: drop-shadow(5px 0 4px 
     #0000001a);
 }
+
 .item:hover .layer {
     left:50px;
 }
