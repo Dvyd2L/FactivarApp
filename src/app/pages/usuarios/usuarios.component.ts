@@ -14,5 +14,5 @@ import { getData } from '@app/services/data.service';
   styleUrl: './usuarios.component.css',
 })
 export class UsuariosComponent {
-  users$ = getData<any[]>('usuarios/all');
+  users$ = getData<any[]>('api/usuarios/all');
 }

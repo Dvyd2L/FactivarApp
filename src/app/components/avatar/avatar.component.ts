@@ -70,8 +70,8 @@ export class AvatarComponent {
   public cerrarSesion() {
     this.auth.logout({ email: this.user.Email });
     this.userSvc.clearUser();
-    this.user = null!
+    this.user = null!;
     StorageHelper.removeItem(StorageKeyEnum.User);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth', 'login']);
   }
 }

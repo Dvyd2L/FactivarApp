@@ -11,6 +11,15 @@
 
   <nav class="navigation">
     <app-hexagon-item
+      title="Inicio"
+      [route]="['/home']"
+      aria-label="Inicio"
+    >
+      <!-- los slots se invocan con el nombre del select de ng-content sin el punto. -->
+      <i class="fa fa-home slot-icon"></i>
+    </app-hexagon-item>
+
+    <app-hexagon-item
       title="Clientes"
       [route]="['/clientes']"
       aria-label="Clientes"

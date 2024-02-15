@@ -4,7 +4,6 @@ import { StorageHelper } from '@app/helpers/storage.helper';
 import { RolesEnum } from '@app/interfaces/enums/roles.enum';
 import { StorageKeyEnum } from '@app/interfaces/enums/storage.enum';
 import { IUserPayload } from '@app/interfaces/user';
-
 /**
  * Guardia que permite el acceso solo a los usuarios con el rol de administrador.
  * Si el usuario no tiene el rol de administrador, se redirige a la página de chat.
@@ -17,6 +16,6 @@ export const adminGuard: CanActivateFn = (): boolean => {
   if (user?.Role === RolesEnum.Admin) {
     return true;
   }
-  router.navigate(['login']);
+  router.navigate(['/auth', 'login']);
   return false;
 };

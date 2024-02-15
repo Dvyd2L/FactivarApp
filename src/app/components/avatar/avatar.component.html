@@ -35,13 +35,8 @@
     <div class="text">Salir</div>
   </button> -->
   } @else {
-  <!-- <a href="/login"> -->
-  <app-boton-accesos
-    texto="Iniciar sesión"
-    aria-label="Login"
-    (click)="cerrarSesion()"
-  />
-  <!-- [routerLink]="['login']" -->
-  <!-- </a> -->
+  <a [routerLink]="['/auth', 'login']">
+    <app-boton-accesos texto="Iniciar sesión" aria-label="Login" />
+  </a>
   }
 </div>

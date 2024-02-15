@@ -106,6 +106,9 @@
   margin-right: auto;
   margin-top: 100px;
   margin-bottom: 100px;
+
+  position: relative;
+  transition: all .2s ease;
 }
 
 /* Fondo de imagen (INVESTIGAR) */
@@ -213,4 +216,8 @@
 .btnCasa:hover svg {
   transform: scale(0.9);
   fill: #333333;
+}
+
+a {
+  text-decoration: none;
 }

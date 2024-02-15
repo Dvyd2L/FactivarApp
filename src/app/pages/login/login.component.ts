@@ -1,10 +1,7 @@
-/**
- * Componente de inicio de sesión.
- */
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BotonAccesosComponent } from '../../components/boton-accesos/boton-accesos.component';
 import { ILoginUser } from '@app/interfaces/user';
 import { AuthService } from '@app/services/auth/auth.service';
@@ -15,29 +12,38 @@ import { PasswordInputComponent } from '../../components/password-input/password
 import { addMessage } from '@app/helpers/message.helper';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
-
+import { LoaderComponent } from '@app/components/loader/loader.component';
+/**
+ * Componente de inicio de sesión.
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     RouterLink,
     BotonAccesosComponent,
     PasswordInputComponent,
     GoogleSigninComponent,
     FacebookSigninComponent,
-    ToastModule
+    ToastModule,
+    LoaderComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   providers: [MessageService, AuthService, Router],
 })
 export class LoginComponent {
-  private router = inject(Router);
-  private auth = inject(AuthService);
-  private messageService = inject(MessageService);
-
-  public infoLogin: ILoginUser = {
+  private readonly router = inject(Router);
+  private readonly auth = inject(AuthService);
+  private readonly messageService = inject(MessageService);
+  public readonly loading = signal(false);
+  public readonly loginForm = new FormGroup({
+    email: new FormControl(),
+    password: new FormControl(),
+  });
+  public readonly infoLogin = {
     email: '',
     password: '',
   };
@@ -50,15 +56,18 @@ export class LoginComponent {
   }
 
   public login() {
-    this.auth.login(this.infoLogin).subscribe({
+    this.loading.update((curr) => !curr);
+    this.auth.login(this.infoLogin as ILoginUser).subscribe({
       next: (data) => this.router.navigate(['/clientes']),
       error: (err) => {
+        this.loading.update((curr) => !curr)
         console.error({ err });
 
         if (err instanceof HttpErrorResponse) {
           this.errorMessage(err, this.messageService);
         }
       },
+      complete: () => this.loading.update((curr) => !curr),
     });
   }
   /**
@@ -68,5 +77,5 @@ export class LoginComponent {
   public loginWithGoogle(idToken: string) {
     this.auth.loginWithGoogle(idToken);
   }
-  private errorMessage = addMessage;
+  private readonly errorMessage = addMessage;
 }

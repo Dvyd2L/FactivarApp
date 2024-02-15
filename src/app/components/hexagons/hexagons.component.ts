@@ -21,18 +21,6 @@ import { FactivarBrandComponent } from '../factivar-brand/factivar-brand.compone
     RouterLinkActive,
     FactivarBrandComponent,
   ],
-  providers: [Router],
+  providers: [],
 })
-export class HexagonsComponent {
-  router = inject(Router);
-
-  toClientes() {
-    this.router.navigate(['clientes']);
-  }
-  toFacturas() {
-    this.router.navigate(['facturas']);
-  }
-  toUsuarios() {
-    this.router.navigate(['usuarios']);
-  }
-}
+export class HexagonsComponent {}

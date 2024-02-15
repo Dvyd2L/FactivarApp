@@ -14,13 +14,11 @@
             Tu página web para una facturación más sencilla e intuitiva
           </h2>
 
-          <a
-            [routerLink]="['/clientes']"
-            routerLinkActive="router-link-active"
+          <app-boton-accesos
             class="mt-2 d-flex justify-content-center"
-          >
-            <app-boton-accesos texto="Entrar" />
-          </a>
+            texto="Entrar"
+            [route]="['/clientes']"
+          />
         </div>
       </div>
     </div>
@@ -112,3 +110,4 @@
   </section>
   <div class="ricias"></div>
 </main>
+<app-footer></app-footer>

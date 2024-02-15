@@ -1,20 +1,2 @@
-@if (isHome()) {
-  <app-home-page/>
-  <app-footer class="factivar-footer" />
-  } @else if (isLogin()) {
-  <app-login />
-  } @else if (isRegister()) {
-  <app-register />
-  } @else {
-  <main class="factivar-layout">
-    <app-hexagons />
-  
-    <div class="factivar-content">
-      <!-- <iframe src="../assets/gist/otro_gist.html" frameborder="0" height="550" width="650"></iframe> -->
-      <router-outlet />
-    </div>
-  
-    <app-footer class="factivar-footer" />
-  </main>
-  }
+<router-outlet />
   
