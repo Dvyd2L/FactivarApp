@@ -17,12 +17,36 @@
       <a href="mailto:{{ c.email }}" class="card-link">{{ c.email }}</a>
     </p>
     <p class="card-text">Dirección: {{ c.direccion }}</p>
+    <form
+      class="edit_invoice"
+      id="busqueda-form"
+      accept-charset="UTF-8"
+      data-remote="true"
+    >
+      <div>
+        <label for="busquedaNumeroFactura" class="form-label"
+          ><i class="fa fa-search icon"></i>&nbsp;&nbsp;N° de factura</label
+        >
+        <input
+          class="form-control form-control-sm"
+          placeholder="Número Factura"
+          maxlength="100"
+          size="100"
+          type="text"
+          [(ngModel)] = "numeroFactuC"
+          name="busquedaNumeroFactura"
+          id="busquedaNumeroFactura"
+          aria-label="Número de factura"
+          (ngModelChange)="buscarFacturaCli($event)"
+        />
+      </div>
+    </form>
 
     <hr />
 
     <h6 class="card-subtitle mb-4 text-body-secondary">Facturas Compradas</h6>
-    <ul *ngIf="c.facturaClientes" class="facturas">
-      @for (item of c.facturaClientes; track $index) {
+    <ul *ngIf="facturasCli2" class="facturas">
+      @for (item of facturasCli2; track $index) {
       <li>
         <p>Numero factura: {{ item.numeroFactura }}</p>
         <figure style="--c: #fff5">
@@ -69,9 +93,34 @@
 
     <hr />
 
+    <form
+      class="edit_invoice"
+      id="busqueda-form"
+      accept-charset="UTF-8"
+      data-remote="true"
+    >
+      <div>
+        <label for="busquedaNumeroFactura" class="form-label"
+          ><i class="fa fa-search icon"></i>&nbsp;&nbsp;N° de factura</label
+        >
+        <input
+          class="form-control form-control-sm"
+          placeholder="Número Factura"
+          maxlength="100"
+          size="100"
+          type="text"
+          [(ngModel)] = "numeroFactuP"
+          name="busquedaNumeroFactura"
+          id="busquedaNumeroFactura"
+          aria-label="Número de factura"
+          (ngModelChange)="buscarFacturaProv($event)"
+        />
+      </div>
+    </form>
+
     <h6 class="card-subtitle mb-4 text-body-secondary">Facturas Vendidas</h6>
-    <ul *ngIf="c.facturaProveedors" class="facturas">
-      @for (item of c.facturaProveedors; track $index) {
+    <ul *ngIf="facturasProv2" class="facturas">
+      @for (item of facturasProv2; track $index) {
       <li>
         <p>Numero factura: {{ item.numeroFactura }}</p>
         <figure style="--c: #fff5">

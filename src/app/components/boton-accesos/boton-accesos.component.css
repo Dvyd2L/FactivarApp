@@ -3,6 +3,8 @@
   justify-content: center;
   align-items: center;
 
+  cursor: pointer;
+
   border: double 10px transparent;
   border-radius: 2rem;
 
@@ -62,7 +64,9 @@ strong {
   background-clip: content-box, border-box;
   animation: none;
 }
-
+a {
+  text-decoration: none;
+}
 /* @keyframes gradient_301 {
   0% {
     background-position: 0% 50%;

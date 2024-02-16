@@ -11,7 +11,7 @@ import {
   withRouterConfig,
   withViewTransitions,
 } from '@angular/router';
-import { routes } from '@app/app.routes';
+import { routes } from '@app/router/app.routes';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { authInterceptorFn } from '@app/interceptors/token-fn.interceptor';
@@ -19,9 +19,6 @@ import localeEs from '@angular/common/locales/es';
 import { provideLocale } from './locale.config';
 import { provideOAuthProvidersConfig } from './oauth.config';
 import { registerLocaleData } from '@angular/common';
-// import { NgxIndexedDBModule } from 'ngx-indexed-db';
-// import { dbConfig } from './indexed-db.config';
-// import { NgxGistModule } from '@proangular/ngx-gist';
 
 registerLocaleData(localeEs);
 /**
@@ -35,12 +32,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withViewTransitions(),
-      // withDebugTracing(),
-      // withRouterConfig({
-      //   paramsInheritanceStrategy: 'always',
-      //   onSameUrlNavigation: 'reload',
-      //   // urlUpdateStrategy: 'deferred',
-      // })
+      withDebugTracing(),
+      withRouterConfig({
+        paramsInheritanceStrategy: 'always',
+        onSameUrlNavigation: 'reload',
+        urlUpdateStrategy: 'eager',
+      })
     ),
     /**
      * Proveedor del cliente HTTP con interceptores.
@@ -49,8 +46,8 @@ export const appConfig: ApplicationConfig = {
     /**
      * Proveedor del cliente OAuth2.
      */
-    provideOAuthClient(),
-    provideOAuthProvidersConfig(), // custom method
+    // provideOAuthClient(),
+    // provideOAuthProvidersConfig(), // custom method
     /**
      * Importa los proveedores del módulo BrowserModule y BrowserAnimationsModule.
      */

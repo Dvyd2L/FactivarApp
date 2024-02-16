@@ -78,7 +78,8 @@ export class ClientesComponent implements OnInit {
   }
 
   buscarPorCif(cif: string) {
-    this.router.navigate(['clientes', 'detail', cif]);
+    // this.router.navigate(['clientes', 'detail', cif]);
+    this.router.navigate(['clientes', cif]);
   }
 
   buscarEntreFechas() {

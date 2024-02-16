@@ -2,7 +2,6 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { StorageHelper } from '@app/helpers/storage.helper';
 import { StorageKeyEnum } from '@app/interfaces/enums/storage.enum';
-
 /**
  * Función que actúa como guardia de autenticación para las rutas en Angular.
  * Comprueba si el usuario está autenticado antes de permitir el acceso a una ruta.
@@ -17,6 +16,6 @@ export const authGuard: CanActivateFn = (): boolean => {
     return true;
   }
 
-  router.navigate(['login']);
+  router.navigate(['/auth', 'login']);
   return false;
 };

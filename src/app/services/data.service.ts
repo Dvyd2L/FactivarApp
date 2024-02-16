@@ -21,7 +21,7 @@ export const getData = <T>(controllerPath: string, http = inject(HttpClient)) =>
 export const getDataByPk = <T>(controllerPath: string) => {
   const http = inject(HttpClient);
   const route = inject(ActivatedRoute);
-  const { pk } = route.snapshot.params;
+  const { id } = route.snapshot.params;
 
-  return http.get<T>(`${environment.urlAPI}api/${controllerPath}/${pk}`);
+  return http.get<T>(`${environment.urlAPI}api/${controllerPath}/${id}`);
 };

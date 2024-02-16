@@ -1,3 +1,23 @@
+dialog {
+  background-color: transparent;
+  border: none;
+  height: 400px;
+  width: 400px;
+  border-radius: 10%;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  scale: 2;
+  z-index: 2;
+  & > span {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  backdrop-filter: blur(10px);
+}
+
 .form {
   margin-top: 20px;
 }

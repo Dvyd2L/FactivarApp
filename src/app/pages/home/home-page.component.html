@@ -13,11 +13,12 @@
           <h2 class="text-white-50 mx-auto mt-2 mb-5">
             Tu página web para una facturación más sencilla e intuitiva
           </h2>
-          <!-- routerLink="/clientes"
-          routerLinkActive="router-link-active" -->
-          <a href="/clientes" class="mt-2 d-flex justify-content-center">
-            <app-boton-accesos texto="Entrar" />
-          </a>
+
+          <app-boton-accesos
+            class="mt-2 d-flex justify-content-center"
+            texto="Entrar"
+            [route]="['/clientes']"
+          />
         </div>
       </div>
     </div>
@@ -109,3 +110,4 @@
   </section>
   <div class="ricias"></div>
 </main>
+<app-footer></app-footer>

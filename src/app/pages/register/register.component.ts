@@ -84,7 +84,7 @@ export class RegisterComponent {
     this.auth.register(this.infoRegister).subscribe({
       next: (data) => {
         console.log(data);
-        this.router.navigateByUrl('login');
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         if (err instanceof HttpErrorResponse) {

@@ -1,62 +1,69 @@
-<div class="container12">
-  <div class="text-center">
+<article class="container12">
+  <figure class="text-center">
     <img
       class="fade-in mb-4"
       src="assets/LogoNegroFondoTransparente.png"
       alt="login"
       style="max-width: 100%"
     />
+  </figure>
+
+  <form class="form-signin" #fLogin="ngForm" (ngSubmit)="login()">
+    <!-- <div class="form-group mb-3"> -->
+    <div class="form-group mb-3">
+      <label for="email" class="sr-only">Usuario</label>
+      <input
+        autocomplete="email"
+        id="email"
+        type="email"
+        class="form-control"
+        placeholder="E-mail"
+        [(ngModel)]="infoLogin.email"
+        name="email"
+        #email="ngModel"
+        required
+      />
+      @if(!email.valid && email.touched){
+      <span class="form-text text-danger"> Email obligatorio </span>}
+    </div>
+
+    <app-password-input
+      class="mb-3"
+      (passwordValueChange)="setPassword($event)"
+    />
+
+    <app-boton-accesos
+      class="mt-2 d-flex justify-content-center"
+      texto="Continuar"
+      (click)="login()"
+    />
+  </form>
+
+  <a class="forgot-password" href="#">¿Te olvidaste de tu contraseña?</a>
+
+  <div>
+    <span id="span23">¿Aún no tienes cuenta? </span>
+    <a [routerLink]="['/auth', 'register']">Registrate</a>
   </div>
 
-  <form action="" class="form">
-    <form class="form-signin" #fLogin="ngForm" (submit)="login()">
-      <div class="form-group mb-3">
-        <label for="email" class="sr-only">Usuario</label>
-        <input
-          autocomplete="email"
-          id="email"
-          type="email"
-          class="form-control"
-          placeholder="E-mail"
-          [(ngModel)]="infoLogin.email"
-          name="email"
-          #email="ngModel"
-          required
-        />
-        @if(!email.valid && email.touched){
-        <span class="form-text text-danger"> Email obligatorio </span>}
-      </div>
+  <hr />
 
-      <app-password-input
-        class="mb-3"
-        (passwordValueChange)="setPassword($event)"
-      />
+  <section class="social-account-container">
+    <span class="title1">O inicia sesión con</span>
+    <div class="social-accounts">
+      <!-- <app-google-signin (idToken)="loginWithGoogle($event)" /> -->
+      <!-- <app-facebook-signin /> -->
+    </div>
+  </section>
 
-      <div class="mt-2 d-flex justify-content-center">
-        <!-- <a routerLink="/clientes"> -->
-          <app-boton-accesos texto="Continuar" (click)="login()"/>
-          <!-- routerLink="/clientes" -->
-        <!-- </a> -->
-      </div>
-    </form>
-    <span class="forgot-password"
-      ><a href="#">¿Te olvidaste de tu contraseña?</a></span
-    >
-    <div>
-      <span id="span23">¿Aún no tienes cuenta? </span>
-      <a routerLink="/register">Registrate</a>
-    </div>
-    <hr />
-    <div class="social-account-container">
-      <span class="title1">O inicia sesión con</span>
-      <div class="social-accounts">
-        <app-google-signin (idToken)="loginWithGoogle($event)" />
-        <app-facebook-signin />
-      </div>
-    </div>
-  </form>
-</div>
-<a class="btnCasa" href="/home">
+</article>
+<dialog [open]="loading()">
+  <span>
+    <app-loader />
+  </span>
+</dialog>
+
+<a class="btnCasa" [routerLink]="['/home']">
   <svg
     fill="#000000"
     width="30px"
@@ -73,4 +80,5 @@
   </svg>
   Inicio
 </a>
+
 <p-toast />
