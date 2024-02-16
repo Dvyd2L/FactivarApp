@@ -149,15 +149,19 @@
           class="checkbox-tick"
         ></path>
       </svg>
-      <span class="label-text"
-        ><strong
-          >Si aceptas, estás de acuerdo con los Términos del servicio y el Aviso
-          de privacidad.</strong
-        ></span
-      >
+      <span class="label-text"><strong>
+          <!-- <a [routerLink]="['terminos-del-servicio']"> Si aceptas, estás de acuerdo con los Términos del servicio y el Aviso
+                de privacidad.</a> -->
+          <button (click)="mostrarTerminos()"> Si aceptas, estás de acuerdo con los Términos del servicio y el Aviso
+            de privacidad.</button>
+        </strong></span>
     </label>
   </div>
 </div>
+<dialog [open]="terminoServicio">
+  <app-terminos-del-servicio></app-terminos-del-servicio>
+</dialog>
+
 <a class="btnCasa" routerLink="/home">
   <svg
     fill="#000000"

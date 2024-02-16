@@ -9,6 +9,7 @@ import { PasswordInputComponent } from '../../components/password-input/password
 import { ToastModule } from 'primeng/toast';
 import { HttpErrorResponse } from '@angular/common/http';
 import { addMessage } from '@app/helpers/message.helper';
+import { TerminosDelServicioComponent } from '@app/components/terminos-del-servicio/terminos-del-servicio.component';
 /**
  * Componente de registro de usuarios.
  */
@@ -21,6 +22,7 @@ import { addMessage } from '@app/helpers/message.helper';
     PasswordInputComponent,
     RouterLink,
     ToastModule,
+    TerminosDelServicioComponent,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -31,6 +33,10 @@ export class RegisterComponent {
   private router = inject(Router);
   private auth = inject(AuthService);
   private messageService = inject(MessageService);
+
+  //Terminos del servicio
+  public terminoServicio = false;
+
   public infoRegister: IRegisterUser = {
     nombre: '',
     apellidos: '',
@@ -40,6 +46,12 @@ export class RegisterComponent {
     password: '',
   };
   public password: string = '';
+
+  //Terminos del servicio
+  public mostrarTerminos() {
+    this.terminoServicio = !this.terminoServicio;
+  }
+
   /**
    * Establece la contraseña del usuario.
    * @param input - Contraseña ingresada por el usuario.
